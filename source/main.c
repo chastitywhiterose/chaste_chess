@@ -11,11 +11,21 @@ SDL_Rect rect;
 int x,y,x1,y1;
 int mouse_state;
 
-#include "sdl_chaste_checkerboard.h"
+char text[0x200],text_scale=1;
+int text_color=0xFF00FF;
 
+#include "sdl_chaste_checkerboard.h"
+#include "sdl_chaste_chess.h"
+#include "sdl_chaste_chess_font_texture.h"
+#include "sdl_chaste_chess_graphics.h"
 
 int main(int argc, char **argv)
 {
+
+ init_main_grid();
+ /*chess_grid_print();*/
+ /*return 0;*/
+
  if(SDL_Init(SDL_INIT_VIDEO))
  {
   printf( "SDL could not initialize! SDL_Error: %s\n",SDL_GetError());return -1;
@@ -39,10 +49,20 @@ int main(int argc, char **argv)
  SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
  chaste_checker();
 
+ main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");
+
+ text_scale=8;
+ text_color=0x00FF00;
+
+ /*sprintf(text,"Chaste\nChess");
+ chaste_font_draw_string_scaled_alpha(text,100,100,text_scale);*/
+
+ chess_grid_draw();
+
  SDL_RenderPresent(renderer);
 
 
-
+ loop=1;
  while(loop)
  {
 
@@ -59,11 +79,6 @@ int main(int argc, char **argv)
 
    if(e.type == SDL_MOUSEBUTTONDOWN)
    {
-    SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
-    SDL_RenderFillRect(renderer,NULL);
-    SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
-    chaste_checker();
-
     x=e.button.x;
     y=e.button.y;
 
@@ -80,6 +95,11 @@ int main(int argc, char **argv)
     /*printf("Cartesian Square clicked: X=%d Y=%d\n",x1,y1);*/
     printf("Chess Square clicked: %c %d\n",'A'+x1,8-y1);
 
+    SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
+    SDL_RenderFillRect(renderer,NULL);
+    SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
+    chaste_checker();
+
     rect.x=x1*main_check.rectsize;
     rect.y=y1*main_check.rectsize;
     rect.w=main_check.rectsize;
@@ -87,6 +107,9 @@ int main(int argc, char **argv)
 
     SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
     SDL_RenderFillRect(renderer,&rect);
+
+    chess_grid_draw();
+
     SDL_RenderPresent(renderer);
 
    }
