@@ -61,6 +61,7 @@ int main(int argc, char **argv)
 
  SDL_RenderPresent(renderer);
 
+ ps.id='0'; /*the id of the selected piece is '0' at the start of the game to signal that no piece is currently selected*/
 
  loop=1;
  while(loop)
@@ -97,6 +98,8 @@ int main(int argc, char **argv)
 
     p=main_grid.array[x+y*8];
 
+    /*print information on the square selected, including what piece.*/
+
     printf("%c %d: ",'A'+x,8-y);
 
     if(p.id=='0')
@@ -105,8 +108,6 @@ int main(int argc, char **argv)
     }
     else
     {
-
-     
 
      if(p.color=='B'){printf("Black ");} 
      if(p.color=='W'){printf("White ");}
@@ -122,19 +123,62 @@ int main(int argc, char **argv)
     }
     /*printf(" %c%c",p.color,p.id);*/
 
-
+    /*draw the checkerboard*/
     SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
     SDL_RenderFillRect(renderer,NULL);
     SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
     chaste_checker();
 
+    /*highlight the square which was clicked*/
     rect.x=x*main_check.rectsize;
     rect.y=y*main_check.rectsize;
     rect.w=main_check.rectsize;
     rect.h=main_check.rectsize;
-
     SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
     SDL_RenderFillRect(renderer,&rect);
+
+    /*
+     now that we know which square was clicked and what piece is there
+     the major step is to highlight which squares it is possible to move it to
+    */
+ 
+    if(p.id=='P')
+    {
+     chess_grid_highlight(x,y+dir);
+     if(p.moves==0)
+     {
+      chess_grid_highlight(x,y+dir*2);
+     }
+    }
+
+    if(p.id=='N')
+    {
+     chess_grid_highlight(x+1,y-2);
+     chess_grid_highlight(x+2,y-1);
+
+     chess_grid_highlight(x+1,y+2);
+     chess_grid_highlight(x+2,y+1);
+
+     chess_grid_highlight(x-1,y-2);
+     chess_grid_highlight(x-2,y-1);
+
+     chess_grid_highlight(x-1,y+2);
+     chess_grid_highlight(x-2,y+1);
+    }
+
+    if(p.id=='R')
+    {
+
+     x1=x+1;
+     y1=y;
+     
+     do
+     {
+      chess_grid_highlight(x1,y1);
+     }
+     while(main_grid.array[x1+y1*8].id=='0');
+
+    }
 
     chess_grid_draw();
 

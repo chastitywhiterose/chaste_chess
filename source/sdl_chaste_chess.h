@@ -15,7 +15,7 @@ char chess_board_pieces[]=
  "00000000"
  "00000000"
  "PPPPPPPP"
- "RNBQKBNR"
+ "R000KBNR"
 };
 
 char chess_board_pieces_color[]=
@@ -65,8 +65,11 @@ struct chess_piece
  int moves;
 };
 
-/*global chess piece that will be used for analyzing all data about the currently selected piece*/
+/*global chess piece that will be used for analyzing all data about the recently clicked piece*/
 struct chess_piece p;
+
+/*global chess piece that will be used for analyzing all data about the currently selected piece if it was clicked last time*/
+struct chess_piece ps;
 
 
 struct chess_grid
