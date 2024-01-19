@@ -56,10 +56,10 @@ void chess_grid_draw()
 void chess_grid_highlight(int x,int y)
 {
 
- if(x<0){printf("Error: Negative X\n"); return;}
- if(y<0){ printf("Error: Negative Y\n"); return;}
- if(x>=8){printf("Error: X too high.\n"); return;}
- if(y>=8){printf("Error: Y too high.\n"); return;}
+ if(x<0){ /*printf("Error: Negative X\n");*/ return;}
+ if(y<0){ /*printf("Error: Negative Y\n");*/ return;}
+ if(x>=8){/*printf("Error: X too high.\n");*/ return;}
+ if(y>=8){/*printf("Error: Y too high.\n");*/ return;}
 
  if(main_grid.array[x+y*8].id=='0')
  {

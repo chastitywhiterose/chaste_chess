@@ -15,7 +15,7 @@ char chess_board_pieces[]=
  "00000000"
  "00000000"
  "PPPPPPPP"
- "R000KBNR"
+ "RNBQKBNR"
 };
 
 char chess_board_pieces_color[]=

@@ -144,6 +144,10 @@ int main(int argc, char **argv)
  
     if(p.id=='P')
     {
+
+     if(p.color=='B'){dir=1;} 
+     if(p.color=='W'){dir=-1;}
+
      chess_grid_highlight(x,y+dir);
      if(p.moves==0)
      {
@@ -171,12 +175,173 @@ int main(int argc, char **argv)
 
      x1=x+1;
      y1=y;
-     
-     do
+     while(x1<8)
      {
       chess_grid_highlight(x1,y1);
+      x1++;
      }
-     while(main_grid.array[x1+y1*8].id=='0');
+    
+     x1=x-1;
+     y1=y;
+     while(x1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+     }
+
+     x1=x;
+     y1=y+1;
+     while(y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      y1++;
+     }
+    
+     x1=x;
+     y1=y-1;
+     while(y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      y1--;
+     }
+
+
+    }
+
+
+    if(p.id=='B')
+    {
+
+     x1=x+1;
+     y1=y+1;
+     while(x1<8&&y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1++;
+     }
+    
+     x1=x-1;
+     y1=y-1;
+     while(x1>=0&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1--;
+     }
+
+     x1=x+1;
+     y1=y-1;
+     while(x1<8&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1--;
+     }
+    
+     x1=x-1;
+     y1=y+1;
+     while(x1>=0&&y1<=8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1++;
+     }
+
+
+    }
+
+
+    if(p.id=='K')
+    {
+     chess_grid_highlight(x-1,y-1);
+     chess_grid_highlight(x  ,y-1);
+     chess_grid_highlight(x+1,y-1);
+
+     chess_grid_highlight(x-1,y);
+     chess_grid_highlight(x+1,y);
+
+     chess_grid_highlight(x-1,y+1);
+     chess_grid_highlight(x  ,y+1);
+     chess_grid_highlight(x+1,y+1);
+    }
+
+    /*
+     the queen inherits the moves of both the rook and the bishop
+     so they have been copy pasted from their sections
+    */
+    if(p.id=='Q')
+    {
+
+     /*first the rook moves of the queen*/
+     x1=x+1;
+     y1=y;
+     while(x1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+     }
+    
+     x1=x-1;
+     y1=y;
+     while(x1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+     }
+
+     x1=x;
+     y1=y+1;
+     while(y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      y1++;
+     }
+    
+     x1=x;
+     y1=y-1;
+     while(y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      y1--;
+     }
+
+    /*then the bishop moves of the queen*/
+     x1=x+1;
+     y1=y+1;
+     while(x1<8&&y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1++;
+     }
+    
+     x1=x-1;
+     y1=y-1;
+     while(x1>=0&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1--;
+     }
+
+     x1=x+1;
+     y1=y-1;
+     while(x1<8&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1--;
+     }
+    
+     x1=x-1;
+     y1=y+1;
+     while(x1>=0&&y1<=8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1++;
+     }
 
     }
 
