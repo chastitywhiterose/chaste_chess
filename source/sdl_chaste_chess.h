@@ -62,7 +62,11 @@ struct chess_piece
 {
  char color;
  char id;
+ int moves;
 };
+
+/*global chess piece that will be used for analyzing all data about the currently selected piece*/
+struct chess_piece p;
 
 
 struct chess_grid
@@ -84,6 +88,7 @@ void init_main_grid()
   {
    main_grid.array[x+y*8].id=chess_board_pieces[x+y*8];
    main_grid.array[x+y*8].color=chess_board_pieces_color[x+y*8];
+   main_grid.array[x+y*8].moves=0;
    x+=1;
   }
   y+=1;
@@ -96,7 +101,7 @@ void init_main_grid()
 void chess_grid_print()
 {
  
- struct chess_piece p;
+ /*struct chess_piece p;*/
 
  y=0;
  while(y<8)
@@ -113,6 +118,11 @@ void chess_grid_print()
   y+=1;
  }
  
-
-
 }
+
+
+
+/*more global variables*/
+
+int dir=-1; /*the direction for pawn movements can be 1 or -1*/
+char turn='W'; /*whose turn it is. W for white and B for black*/

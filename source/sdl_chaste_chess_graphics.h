@@ -23,6 +23,10 @@ void chess_grid_draw()
   while(x<8)
   {
    p=main_grid.array[x+y*8];
+
+   if(p.id!='0')
+{
+
    /*printf(" %c%c",p.color,p.id);*/
    /*printf(" %c",p.id);*/
    
@@ -32,6 +36,7 @@ void chess_grid_draw()
     y1=y*main_check.rectsize;
 
    chaste_font_draw_string_scaled_alpha(text,x1+x2,y1+x2,text_scale);
+}
 
    x+=1;
   }

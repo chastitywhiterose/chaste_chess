@@ -66,8 +66,8 @@ int main(int argc, char **argv)
  while(loop)
  {
 
-
-
+  /*the gameloop always starts with polling the input including mouse clicks.*/
+  
   while(SDL_PollEvent(&e))
   {
 
@@ -89,19 +89,47 @@ int main(int argc, char **argv)
     if(e.button.button==SDL_BUTTON_MIDDLE){printf("SDL_BUTTON_MIDDLE");}
     printf("\n");*/
 
-    x1=x/main_check.rectsize;
-    y1=y/main_check.rectsize;
+    x=x/main_check.rectsize;
+    y=y/main_check.rectsize;
 
-    /*printf("Cartesian Square clicked: X=%d Y=%d\n",x1,y1);*/
-    printf("Chess Square clicked: %c %d\n",'A'+x1,8-y1);
+    printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
+    /*printf("Chess Square clicked: %c %d\n",'A'+x,8-y);*/
+
+    p=main_grid.array[x+y*8];
+
+    printf("%c %d: ",'A'+x,8-y);
+
+    if(p.id=='0')
+    {
+     printf("Blank Space\n");
+    }
+    else
+    {
+
+     
+
+     if(p.color=='B'){printf("Black ");} 
+     if(p.color=='W'){printf("White ");}
+
+     if(p.id=='P'){printf("Pawn");}
+     if(p.id=='R'){printf("Rook");}
+     if(p.id=='N'){printf("kNight");}
+     if(p.id=='B'){printf("Bishop");}
+     if(p.id=='Q'){printf("Queen");}
+     if(p.id=='K'){printf("King");}
+
+     printf("\n");
+    }
+    /*printf(" %c%c",p.color,p.id);*/
+
 
     SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
     SDL_RenderFillRect(renderer,NULL);
     SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
     chaste_checker();
 
-    rect.x=x1*main_check.rectsize;
-    rect.y=y1*main_check.rectsize;
+    rect.x=x*main_check.rectsize;
+    rect.y=y*main_check.rectsize;
     rect.w=main_check.rectsize;
     rect.h=main_check.rectsize;
 
