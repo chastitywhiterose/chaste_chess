@@ -108,6 +108,82 @@ void chess_grid_highlight(int x,int y)
 }
 
 
+
+void check_moves_rook()
+{
+     x1=x+1;
+     y1=y;
+     while(x1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+     }
+    
+     x1=x-1;
+     y1=y;
+     while(x1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+     }
+
+     x1=x;
+     y1=y+1;
+     while(y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      y1++;
+     }
+    
+     x1=x;
+     y1=y-1;
+     while(y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      y1--;
+     }
+}
+
+
+void check_moves_bishop()
+{
+	x1=x+1;
+     y1=y+1;
+     while(x1<8&&y1<8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1++;
+     }
+    
+     x1=x-1;
+     y1=y-1;
+     while(x1>=0&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1--;
+     }
+
+     x1=x+1;
+     y1=y-1;
+     while(x1<8&&y1>=0)
+     {
+      chess_grid_highlight(x1,y1);
+      x1++;
+      y1--;
+     }
+    
+     x1=x-1;
+     y1=y+1;
+     while(x1>=0&&y1<=8)
+     {
+      chess_grid_highlight(x1,y1);
+      x1--;
+      y1++;
+     }
+}
+
 void check_moves_of_clicked_piece()
 {
 	
@@ -141,83 +217,13 @@ void check_moves_of_clicked_piece()
 
     if(p.id=='R')
     {
-
-     x1=x+1;
-     y1=y;
-     while(x1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-     }
-    
-     x1=x-1;
-     y1=y;
-     while(x1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-     }
-
-     x1=x;
-     y1=y+1;
-     while(y1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      y1++;
-     }
-    
-     x1=x;
-     y1=y-1;
-     while(y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      y1--;
-     }
-
-
+     check_moves_rook();
     }
 
 
     if(p.id=='B')
     {
-
-     x1=x+1;
-     y1=y+1;
-     while(x1<8&&y1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-      y1++;
-     }
-    
-     x1=x-1;
-     y1=y-1;
-     while(x1>=0&&y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-      y1--;
-     }
-
-     x1=x+1;
-     y1=y-1;
-     while(x1<8&&y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-      y1--;
-     }
-    
-     x1=x-1;
-     y1=y+1;
-     while(x1>=0&&y1<=8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-      y1++;
-     }
-
-
+     check_moves_bishop();
     }
 
 
@@ -241,77 +247,8 @@ void check_moves_of_clicked_piece()
     */
     if(p.id=='Q')
     {
-
-     /*first the rook moves of the queen*/
-     x1=x+1;
-     y1=y;
-     while(x1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-     }
-    
-     x1=x-1;
-     y1=y;
-     while(x1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-     }
-
-     x1=x;
-     y1=y+1;
-     while(y1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      y1++;
-     }
-    
-     x1=x;
-     y1=y-1;
-     while(y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      y1--;
-     }
-
-    /*then the bishop moves of the queen*/
-     x1=x+1;
-     y1=y+1;
-     while(x1<8&&y1<8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-      y1++;
-     }
-    
-     x1=x-1;
-     y1=y-1;
-     while(x1>=0&&y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-      y1--;
-     }
-
-     x1=x+1;
-     y1=y-1;
-     while(x1<8&&y1>=0)
-     {
-      chess_grid_highlight(x1,y1);
-      x1++;
-      y1--;
-     }
-    
-     x1=x-1;
-     y1=y+1;
-     while(x1>=0&&y1<=8)
-     {
-      chess_grid_highlight(x1,y1);
-      x1--;
-      y1++;
-     }
-
+     check_moves_rook();
+   	 check_moves_bishop();
     }
 	
 }
