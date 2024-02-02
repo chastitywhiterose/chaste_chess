@@ -63,6 +63,7 @@ struct chess_piece
  char color;
  char id;
  int moves;
+ int x,y;
 };
 
 /*global chess piece that will be used for analyzing all data about the recently clicked piece*/

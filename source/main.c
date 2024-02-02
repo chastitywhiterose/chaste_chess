@@ -76,7 +76,18 @@ int main(int argc, char **argv)
    if(e.type == SDL_KEYUP)
    {
     if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+    if(e.key.keysym.sym==SDLK_r)
+    {
+     init_main_grid();
+     turn='W';
+     draw_game_scene();
+     chess_grid_draw();
+     SDL_RenderPresent(renderer);
+    }
    }
+
+
+
 
    if(e.type == SDL_MOUSEBUTTONDOWN)
    {
@@ -97,6 +108,9 @@ int main(int argc, char **argv)
     /*printf("Chess Square clicked: %c %d\n",'A'+x,8-y);*/
 
     p=main_grid.array[x+y*8];
+
+    p.x=x;
+    p.y=y;
 
     /*print information on the square selected, including what piece.*/
 
@@ -122,25 +136,21 @@ int main(int argc, char **argv)
      printf("\n");
     }
     /*printf(" %c%c",p.color,p.id);*/
+	
 
-    /*draw the checkerboard*/
-    SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
-    SDL_RenderFillRect(renderer,NULL);
-    SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
-    chaste_checker();
 
-    /*highlight the square which was clicked*/
-    rect.x=x*main_check.rectsize;
-    rect.y=y*main_check.rectsize;
-    rect.w=main_check.rectsize;
-    rect.h=main_check.rectsize;
-    SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
-    SDL_RenderFillRect(renderer,&rect);
+    
 
+ 
     /*
+	 no piece is selected. we will try to select this piece and check the moves it might make
      now that we know which square was clicked and what piece is there
      the major step is to highlight which squares it is possible to move it to
     */
+    if(ps.id=='0')
+	{
+		
+	draw_game_scene();
  
     init_highlight();
  
@@ -149,6 +159,50 @@ int main(int argc, char **argv)
     chess_grid_draw();
 
     SDL_RenderPresent(renderer);
+	
+	if(p.color==turn)
+	{
+		ps=p;
+		printf("It is %c turn. This piece has been selected for possible move\n", turn );
+	}
+	
+	if(p.color!=turn)
+	{
+		ps.id='0'; /*deselect piece*/
+		printf("It is not %c turn. This piece cannot be selected for move\n", p.color );
+	}
+	
+	}
+	
+    /*
+	 piece has been selected previously
+	 move it there if it has been highlighted as valid move!
+	*/
+	else
+	{
+	 if(highlight[x+y*8]==1)
+	 {
+	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
+      main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
+
+      if(turn=='W'){turn='B';}
+      else{turn='W';}
+
+    	 printf("Piece moved to %d,%d\n", x,y );
+	  ps.id='0'; /*deselect piece after move*/
+	 }
+	 else
+	 {
+		 ps.id='0';
+		 printf("piece can't move there\n");
+	 }
+	 
+     draw_game_scene();
+     chess_grid_draw();
+	 
+     SDL_RenderPresent(renderer);
+
+	}
 
    }
 

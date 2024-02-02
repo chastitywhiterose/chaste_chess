@@ -53,6 +53,33 @@ void chess_grid_draw()
 
 
 
+
+
+void draw_game_scene()
+{
+
+/*draw the checkerboard*/
+    SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
+    SDL_RenderFillRect(renderer,NULL);
+    SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
+    chaste_checker();
+
+    /*highlight the square which was clicked*/
+    rect.x=x*main_check.rectsize;
+    rect.y=y*main_check.rectsize;
+    rect.w=main_check.rectsize;
+    rect.h=main_check.rectsize;
+    SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
+    SDL_RenderFillRect(renderer,&rect);
+
+}
+
+
+
+
+
+
+
 char highlight[64];
 
 void init_highlight()
@@ -73,7 +100,7 @@ void init_highlight()
 
 }
 
-
+int highloop=0; /*highlight loop control*/
 
 void chess_grid_highlight(int x,int y)
 {
@@ -86,14 +113,21 @@ void chess_grid_highlight(int x,int y)
  if(main_grid.array[x+y*8].id=='0')
  {
   SDL_SetRenderDrawColor(renderer,0x00,0xFF,0x00,255);
+  highlight[x+y*8]=1;
  }
  else if(main_grid.array[x+y*8].color==p.color)
  {
   SDL_SetRenderDrawColor(renderer,0xFF,0x00,0x00,255);
+  /*
+   same color as moving piece
+   can't capture this piece or move beyond it
+  */
+  highlight[x+y*8]=0;
+  highloop=0;
  }
  else
  {
-  
+  highlight[x+y*8]=1;
  }
 
 
@@ -111,33 +145,37 @@ void chess_grid_highlight(int x,int y)
 
 void check_moves_rook()
 {
+	 highloop=1;
      x1=x+1;
      y1=y;
-     while(x1<8)
+     while(x1<8 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1++;
      }
     
+	 highloop=1;
      x1=x-1;
      y1=y;
-     while(x1>=0)
+     while(x1>=0 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1--;
      }
 
+     highloop=1;
      x1=x;
      y1=y+1;
-     while(y1<8)
+     while(y1<8 && highloop)
      {
       chess_grid_highlight(x1,y1);
       y1++;
      }
     
+	 highloop=1;
      x1=x;
      y1=y-1;
-     while(y1>=0)
+     while(y1>=0 && highloop)
      {
       chess_grid_highlight(x1,y1);
       y1--;
@@ -147,36 +185,40 @@ void check_moves_rook()
 
 void check_moves_bishop()
 {
-	x1=x+1;
+	 highloop=1;
+	 x1=x+1;
      y1=y+1;
-     while(x1<8&&y1<8)
+     while(x1<8&&y1<8 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1++;
       y1++;
      }
     
+	highloop=1;
      x1=x-1;
      y1=y-1;
-     while(x1>=0&&y1>=0)
+     while(x1>=0&&y1>=0 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1--;
       y1--;
      }
 
+highloop=1;
      x1=x+1;
      y1=y-1;
-     while(x1<8&&y1>=0)
+     while(x1<8&&y1>=0 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1++;
       y1--;
      }
     
+	highloop=1;
      x1=x-1;
      y1=y+1;
-     while(x1>=0&&y1<=8)
+     while(x1>=0&&y1<=8 && highloop)
      {
       chess_grid_highlight(x1,y1);
       x1--;
