@@ -112,11 +112,17 @@ void chess_grid_highlight(int x,int y)
 
  if(main_grid.array[x+y*8].id=='0')
  {
+  /*this space will be marked green meaning "go" because you can move here and it is blank*/
   SDL_SetRenderDrawColor(renderer,0x00,0xFF,0x00,255);
   highlight[x+y*8]=1;
  }
- else if(main_grid.array[x+y*8].color==p.color)
+ else 
+{
+ /*this condition happens if there is a piece and the space is not blank*/
+
+ if(main_grid.array[x+y*8].color==p.color)
  {
+  /*this space will be marked red meaning "stop" because you can't move here and the piece is the same color as the piece you are moving*/
   SDL_SetRenderDrawColor(renderer,0xFF,0x00,0x00,255);
   /*
    same color as moving piece
@@ -125,11 +131,20 @@ void chess_grid_highlight(int x,int y)
   highlight[x+y*8]=0;
   highloop=0;
  }
- else
+
+ if(main_grid.array[x+y*8].color!=p.color)
  {
+  /*this space will be marked blue to indicate a piece can be captured*/
+  SDL_SetRenderDrawColor(renderer,0x00,0x00,0xFF,255);
+  /*
+   same color as moving piece
+   can't capture this piece or move beyond it
+  */
   highlight[x+y*8]=1;
+  highloop=0;
  }
 
+}
 
  /*highlight the square which was clicked*/
  rect.x=x*main_check.rectsize;
@@ -145,7 +160,7 @@ void chess_grid_highlight(int x,int y)
 
 void check_moves_rook()
 {
-	 highloop=1;
+     highloop=1;
      x1=x+1;
      y1=y;
      while(x1<8 && highloop)
@@ -228,8 +243,8 @@ highloop=1;
 
 void check_moves_of_clicked_piece()
 {
-	
-	if(p.id=='P')
+    /*check all legal pawn moves*/
+    if(p.id=='P')
     {
 
      if(p.color=='B'){dir=1;} 
@@ -240,6 +255,7 @@ void check_moves_of_clicked_piece()
      {
       chess_grid_highlight(x,y+dir*2);
      }
+
     }
 
     if(p.id=='N')
