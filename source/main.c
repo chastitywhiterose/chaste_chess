@@ -148,7 +148,7 @@ int main(int argc, char **argv)
      the major step is to highlight which squares it is possible to move it to
     */
     if(ps.id=='0')
-	{
+    {
 		
 	draw_game_scene();
  
@@ -160,6 +160,9 @@ int main(int argc, char **argv)
 
     SDL_RenderPresent(renderer);
 	
+     if(p.id!='0')
+     {
+
 	if(p.color==turn)
 	{
 		ps=p;
@@ -171,8 +174,10 @@ int main(int argc, char **argv)
 		ps.id='0'; /*deselect piece*/
 		printf("It is not this player's turn. This piece cannot be selected for move\n");
 	}
+
+      }
 	
-	}
+     }
 	
     /*
 	 piece has been selected previously
@@ -180,7 +185,7 @@ int main(int argc, char **argv)
 	*/
 	else
 	{
-	 if(highlight[x+y*8]==1)
+	 if(highlight[x+y*8]!=0)
 	 {
           ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/

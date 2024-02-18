@@ -187,7 +187,7 @@ void check_moves_rook()
       y1++;
      }
     
-	 highloop=1;
+     highloop=1;
      x1=x;
      y1=y-1;
      while(y1>=0 && highloop)
@@ -247,14 +247,40 @@ void check_moves_of_clicked_piece()
     if(p.id=='P')
     {
 
+     /*set direction of pawn based on whose turn it is*/
      if(p.color=='B'){dir=1;} 
      if(p.color=='W'){dir=-1;}
 
-     chess_grid_highlight(x,y+dir);
+     /*these next two sections of conditionals make sure that pawns move forward only onto blank spaces but can't capture pieces directly in front of them because this is not legal in chess.*/
+
+     if(main_grid.array[x+(y+dir)*8].id=='0')
+     {
+      chess_grid_highlight(x,y+dir);
+     }
+
      if(p.moves==0)
      {
-      chess_grid_highlight(x,y+dir*2);
+      if(main_grid.array[x+(y+dir*2)*8].id=='0')
+      {
+       chess_grid_highlight(x,y+dir*2);
+      }
      }
+
+   /*end of pawn moving forward section*/
+
+   /*begin pawn capturing section*/
+
+    if(main_grid.array[x+1+(y+dir)*8].id!='0')
+    {
+     chess_grid_highlight(x+1,y+dir);
+    }
+
+    if(main_grid.array[x-1+(y+dir)*8].id!='0')
+    {
+     chess_grid_highlight(x-1,y+dir);
+    }
+
+   /*end pawn capturing section*/
 
     }
 
