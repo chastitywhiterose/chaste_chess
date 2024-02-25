@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <SDL.h>
+#include <SDL_image.h>
 
 int width=720,height=720;
 int loop=1;
@@ -14,14 +15,16 @@ int mouse_state;
 char text[0x200],text_scale=1;
 int text_color=0xFF00FF;
 
+SDL_Texture *texture;
+
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
 #include "sdl_chaste_chess_font_texture.h"
+#include "sdl_chaste_chess_image.h"
 #include "sdl_chaste_chess_graphics.h"
 
 int main(int argc, char **argv)
 {
-
  init_main_grid();
  /*chess_grid_print();*/
  /*return 0;*/
@@ -30,12 +33,19 @@ int main(int argc, char **argv)
  {
   printf( "SDL could not initialize! SDL_Error: %s\n",SDL_GetError());return -1;
  }
- window=SDL_CreateWindow("Chaste Chess",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height,SDL_WINDOW_SHOWN );
+ window=SDL_CreateWindow("SDL Chaste Chess",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height,SDL_WINDOW_SHOWN );
  if(window==NULL){printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
  renderer = SDL_CreateRenderer(window,-1,0);
  if(renderer==NULL){printf( "Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
 
  printf("SDL Program Compiled Correctly\n");
+
+ x=IMG_Init(IMG_INIT_PNG);
+ printf("IMG_Init: %d\n",x);
+
+ /*image_fill("./image/Chessboard_720_Alpha.png");*/
+
+ load_pieces("./image/Chessboard_720_Alpha.png");
 
  init_checkerboard();
  main_check.rectsize=height/8;
@@ -57,7 +67,9 @@ int main(int argc, char **argv)
  /*sprintf(text,"Chaste\nChess");
  chaste_font_draw_string_scaled_alpha(text,100,100,text_scale);*/
 
- chess_grid_draw_text();
+ /*chess_grid_draw_text();*/
+
+ chess_grid_draw_pieces();
 
  SDL_RenderPresent(renderer);
 
