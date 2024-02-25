@@ -57,7 +57,7 @@ int main(int argc, char **argv)
  /*sprintf(text,"Chaste\nChess");
  chaste_font_draw_string_scaled_alpha(text,100,100,text_scale);*/
 
- chess_grid_draw();
+ chess_grid_draw_text();
 
  SDL_RenderPresent(renderer);
 
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
      init_main_grid();
      turn='W';
      draw_game_scene();
-     chess_grid_draw();
+     chess_grid_draw_text();
      SDL_RenderPresent(renderer);
     }
    }
@@ -156,7 +156,9 @@ int main(int argc, char **argv)
  
     check_moves_of_clicked_piece();
 
-    chess_grid_draw();
+    chess_grid_draw_highlight();
+
+    chess_grid_draw_text();
 
     SDL_RenderPresent(renderer);
 	
@@ -185,7 +187,7 @@ int main(int argc, char **argv)
 	*/
 	else
 	{
-	 if(highlight[x+y*8]!=0)
+	 if(highlight[x+y*8]>0)
 	 {
           ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
@@ -212,8 +214,7 @@ int main(int argc, char **argv)
 	 }
 	 
      draw_game_scene();
-     chess_grid_draw();
-	 
+     chess_grid_draw_text();
      SDL_RenderPresent(renderer);
 
 	}

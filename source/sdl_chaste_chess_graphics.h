@@ -4,7 +4,7 @@
 
 */
 
-void chess_grid_draw()
+void chess_grid_draw_text()
 {
  int x,y,x1,y1,x2;
  struct chess_piece p;
@@ -26,21 +26,21 @@ void chess_grid_draw()
    p=main_grid.array[x+y*8];
 
    if(p.id!='0')
-{
+   {
 
    /*printf(" %c%c",p.color,p.id);*/
    /*printf(" %c",p.id);*/
    
-   sprintf(text,"%c",p.id);
+    sprintf(text,"%c",p.id);
 
     x1=x*main_check.rectsize;
     y1=y*main_check.rectsize;
 
- if(p.color=='B'){text_color=0x000000;}
- if(p.color=='W'){text_color=0xFFFFFF;}
+    if(p.color=='B'){text_color=0x000000;}
+    if(p.color=='W'){text_color=0xFFFFFF;}
 
    chaste_font_draw_string_scaled_alpha(text,x1+x2,y1+x2,text_scale);
-}
+   }
 
    x+=1;
   }
@@ -51,27 +51,25 @@ void chess_grid_draw()
 }
 
 
-
-
-
+/*
+function to draw the "game scene" which includes the checkerboard and the square which was clicked using the carefully chosen shades of gray I designed. This doesn't include drawing of the pieces because different functions for that specifically may be changed.
+*/
 
 void draw_game_scene()
 {
+ /*draw the checkerboard*/
+ SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
+ SDL_RenderFillRect(renderer,NULL);
+ SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
+ chaste_checker();
 
-/*draw the checkerboard*/
-    SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
-    SDL_RenderFillRect(renderer,NULL);
-    SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
-    chaste_checker();
-
-    /*highlight the square which was clicked*/
-    rect.x=x*main_check.rectsize;
-    rect.y=y*main_check.rectsize;
-    rect.w=main_check.rectsize;
-    rect.h=main_check.rectsize;
-    SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
-    SDL_RenderFillRect(renderer,&rect);
-
+ /*highlight the square which was clicked*/
+ rect.x=x*main_check.rectsize;
+ rect.y=y*main_check.rectsize;
+ rect.w=main_check.rectsize;
+ rect.h=main_check.rectsize;
+ SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
+ SDL_RenderFillRect(renderer,&rect);
 }
 
 
@@ -80,9 +78,12 @@ void draw_game_scene()
 
 
 
-char highlight[64];
 
-void init_highlight()
+
+
+
+
+void chess_grid_draw_highlight()
 {
  int x,y;
 
@@ -92,67 +93,38 @@ void init_highlight()
   x=0;
   while(x<8)
   {
-   highlight[x+y*8]=0;
+   /*highlight[x+y*8]=0;*/
+
+   if(highlight[x+y*8]!=0)
+   {
+
+    if(highlight[x+y*8]==1)
+    {
+     /*this space will be marked green meaning "go" because you can move here and it is blank*/
+     SDL_SetRenderDrawColor(renderer,0x00,0xFF,0x00,255);
+    }
+    if(highlight[x+y*8]==-1)
+    {
+    /*this space will be marked red meaning "stop" because you can't move here and the piece is the same color as the piece you are moving*/
+     SDL_SetRenderDrawColor(renderer,0xFF,0x00,0x00,255);
+    }
+    if(highlight[x+y*8]==2)
+    {
+     /*this space will be marked blue to indicate a piece can be captured*/
+     SDL_SetRenderDrawColor(renderer,0x00,0x00,0xFF,255);
+    }
+
+    rect.x=x*main_check.rectsize;
+    rect.y=y*main_check.rectsize;
+    rect.w=main_check.rectsize;
+    rect.h=main_check.rectsize;
+    SDL_RenderFillRect(renderer,&rect);
+   }
+
    x+=1;
   }
   y+=1;
  }
-
-}
-
-int highloop=0; /*highlight loop control*/
-
-void chess_grid_highlight(int x,int y)
-{
-
- if(x<0){ /*printf("Error: Negative X\n");*/ return;}
- if(y<0){ /*printf("Error: Negative Y\n");*/ return;}
- if(x>=8){/*printf("Error: X too high.\n");*/ return;}
- if(y>=8){/*printf("Error: Y too high.\n");*/ return;}
-
- if(main_grid.array[x+y*8].id=='0')
- {
-  /*this space will be marked green meaning "go" because you can move here and it is blank*/
-  SDL_SetRenderDrawColor(renderer,0x00,0xFF,0x00,255);
-  highlight[x+y*8]=1;
- }
- else 
-{
- /*this condition happens if there is a piece and the space is not blank*/
-
- if(main_grid.array[x+y*8].color==p.color)
- {
-  /*this space will be marked red meaning "stop" because you can't move here and the piece is the same color as the piece you are moving*/
-  SDL_SetRenderDrawColor(renderer,0xFF,0x00,0x00,255);
-  /*
-   same color as moving piece
-   can't capture this piece or move beyond it
-  */
-  highlight[x+y*8]=0;
-  highloop=0;
- }
-
- if(main_grid.array[x+y*8].color!=p.color)
- {
-  /*this space will be marked blue to indicate a piece can be captured*/
-  SDL_SetRenderDrawColor(renderer,0x00,0x00,0xFF,255);
-  /*
-   same color as moving piece
-   can't capture this piece or move beyond it
-  */
-  highlight[x+y*8]=1;
-  highloop=0;
- }
-
-}
-
- /*highlight the square which was clicked*/
- rect.x=x*main_check.rectsize;
- rect.y=y*main_check.rectsize;
- rect.w=main_check.rectsize;
- rect.h=main_check.rectsize;
- 
- SDL_RenderFillRect(renderer,&rect);
 
 }
 
