@@ -45,7 +45,8 @@ int main(int argc, char **argv)
 
  /*image_fill("./image/Chessboard_720_Alpha.png");*/
 
- load_pieces("./image/Chessboard_720_Alpha.png");
+ x=load_pieces("./image/Chessboard_720_Alpha.png");
+ if(x){chess_grid_draw=chess_grid_draw_pieces;}
 
  init_checkerboard();
  main_check.rectsize=height/8;
@@ -67,9 +68,7 @@ int main(int argc, char **argv)
  /*sprintf(text,"Chaste\nChess");
  chaste_font_draw_string_scaled_alpha(text,100,100,text_scale);*/
 
- /*chess_grid_draw_text();*/
-
- chess_grid_draw_pieces();
+ chess_grid_draw();
 
  SDL_RenderPresent(renderer);
 
@@ -93,7 +92,7 @@ int main(int argc, char **argv)
      init_main_grid();
      turn='W';
      draw_game_scene();
-     chess_grid_draw_text();
+     chess_grid_draw();
      SDL_RenderPresent(renderer);
     }
    }
@@ -170,7 +169,7 @@ int main(int argc, char **argv)
 
     chess_grid_draw_highlight();
 
-    chess_grid_draw_text();
+    chess_grid_draw();
 
     SDL_RenderPresent(renderer);
 	
@@ -226,7 +225,7 @@ int main(int argc, char **argv)
 	 }
 	 
      draw_game_scene();
-     chess_grid_draw_text();
+     chess_grid_draw();
      SDL_RenderPresent(renderer);
 
 	}

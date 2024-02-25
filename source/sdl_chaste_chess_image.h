@@ -7,7 +7,7 @@ it only works according to the one that I have specifically edited for this purp
 load the chess pieces from a 720x720 image I prepared
 */
 
-void load_pieces(char *filename)
+int load_pieces(char *filename)
 {
  int w,h;
  /* Open the image file */
@@ -16,6 +16,7 @@ void load_pieces(char *filename)
  if (!texture)
  {
   SDL_Log("Couldn't load %s: %s\n", filename, SDL_GetError());
+  return 0;
  }
  else
  {
@@ -23,6 +24,7 @@ void load_pieces(char *filename)
   printf("Image '%s' loaded\n",filename);
   printf("Texture dimensions w=%d,h=%d\n",w,h);
  }
+ return 1;
 }
 
 
@@ -33,7 +35,7 @@ void load_pieces(char *filename)
 
 void chess_grid_draw_pieces()
 {
- int x,y,x1,y1,x2;
+ int x,y,x1,y1;
  struct chess_piece p;
  SDL_Rect rect_dst;
 
@@ -43,9 +45,6 @@ void chess_grid_draw_pieces()
  rect_dst.h=main_check.rectsize;
 
  /*printf("main_check.rectsize=%d\n",main_check.rectsize);*/
-
- x2=(main_check.rectsize-(text_scale*main_font.char_width))/2;
- /*printf("x2=%d\n",x2);*/
 
  y=0;
  while(y<8)
@@ -73,6 +72,33 @@ void chess_grid_draw_pieces()
       rect.x=0*main_check.rectsize;
       rect.y=1*main_check.rectsize;
      }
+     if(p.id=='R')
+     {
+      rect.x=0*main_check.rectsize;
+      rect.y=0*main_check.rectsize;
+     }
+     if(p.id=='N')
+     {
+      rect.x=1*main_check.rectsize;
+      rect.y=0*main_check.rectsize;
+     }
+     if(p.id=='B')
+     {
+      rect.x=2*main_check.rectsize;
+      rect.y=0*main_check.rectsize;
+     }
+     if(p.id=='Q')
+     {
+      rect.x=3*main_check.rectsize;
+      rect.y=0*main_check.rectsize;
+     }
+     if(p.id=='K')
+     {
+      rect.x=4*main_check.rectsize;
+      rect.y=0*main_check.rectsize;
+     }
+
+     
     }
     if(p.color=='W')
     {
@@ -81,12 +107,38 @@ void chess_grid_draw_pieces()
       rect.x=0*main_check.rectsize;
       rect.y=6*main_check.rectsize;
      }
+     if(p.id=='R')
+     {
+      rect.x=0*main_check.rectsize;
+      rect.y=7*main_check.rectsize;
+     }
+     if(p.id=='N')
+     {
+      rect.x=1*main_check.rectsize;
+      rect.y=7*main_check.rectsize;
+     }
+     if(p.id=='B')
+     {
+      rect.x=2*main_check.rectsize;
+      rect.y=7*main_check.rectsize;
+     }
+     if(p.id=='Q')
+     {
+      rect.x=3*main_check.rectsize;
+      rect.y=7*main_check.rectsize;
+     }
+     if(p.id=='K')
+     {
+      rect.x=4*main_check.rectsize;
+      rect.y=7*main_check.rectsize;
+     }
+
+
+
     }
 
-   /*chaste_font_draw_string_scaled_alpha(text,x1+x2,y1+x2,text_scale);*/
-
-      rect_dst.x=x1;
-      rect_dst.y=y1;
+    rect_dst.x=x1;
+    rect_dst.y=y1;
 
     SDL_RenderCopy(renderer, texture, &rect, &rect_dst);
 

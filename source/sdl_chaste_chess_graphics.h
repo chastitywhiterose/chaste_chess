@@ -52,6 +52,13 @@ void chess_grid_draw_text()
 
 
 /*
+ a function pointer that points to the current function used for drawing the chess pieces
+ by default it points to the function that represents them with text
+*/
+void (*chess_grid_draw)()=chess_grid_draw_text;
+
+
+/*
 function to draw the "game scene" which includes the checkerboard and the square which was clicked using the carefully chosen shades of gray I designed. This doesn't include drawing of the pieces because different functions for that specifically may be changed.
 */
 
