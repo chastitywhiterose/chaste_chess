@@ -51,6 +51,7 @@ void chess_square_select()
     */
     if(ps.id=='0')
     {
+     piece_moved=0;
 		
 	   draw_game_scene();
  
@@ -94,6 +95,7 @@ void chess_square_select()
           ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
       main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
+      piece_moved=1;
 
       if(turn=='W')
       {
@@ -149,7 +151,7 @@ while(SDL_PollEvent(&e))
      SDL_RenderPresent(renderer);
     }
 
-    key_rect_shown=1;
+    keyboard_state=0;
     key=e.key.keysym.sym;
 
    switch(key)
@@ -159,23 +161,35 @@ while(SDL_PollEvent(&e))
     case SDLK_UP:
     case SDLK_w:
      ky--;
-     key_rect_shown=1;
+     keyboard_shown=1;
     break;
     case SDLK_DOWN:
     case SDLK_s:
      ky++;
-     key_rect_shown=1;
+     keyboard_shown=1;
     break;
     case SDLK_LEFT:
     case SDLK_a:
      kx--;
-     key_rect_shown=1;
+     keyboard_shown=1;
     break;
     case SDLK_RIGHT:
     case SDLK_d:
      kx++;
-     key_rect_shown=1;
+     keyboard_shown=1;
     break;
+
+
+    case SDLK_z:
+     
+    break;
+
+    case SDLK_x:
+     x=kx;
+     y=ky;
+     chess_square_select();
+    break;
+
    }
 
 
@@ -213,6 +227,29 @@ while(SDL_PollEvent(&e))
    if(mouse_state)
    {
     chess_square_select();
+   }
+
+   if(keyboard_shown)
+   {
+    draw_game_scene();
+    init_highlight();
+    check_moves_of_clicked_piece();
+    if(!piece_moved){chess_grid_draw_highlight();}
+    chess_grid_draw();
+
+    /*draw outline of cursor controlled by keyboard*/
+    key_rect.x=kx*main_check.rectsize;
+    key_rect.y=ky*main_check.rectsize;
+    key_rect.w=main_check.rectsize;
+    key_rect.h=main_check.rectsize;
+    SDL_SetRenderDrawColor(renderer,0xFF,0x00,0xFF,255);
+    SDL_RenderDrawRect(renderer,&key_rect);
+
+    /*draw X with two lines for additional visibility*/
+    SDL_RenderDrawLine(renderer,key_rect.x, key_rect.y, key_rect.x+main_check.rectsize, key_rect.y+main_check.rectsize);
+    SDL_RenderDrawLine(renderer,key_rect.x, key_rect.y+main_check.rectsize, key_rect.x+main_check.rectsize, key_rect.y);
+
+    SDL_RenderPresent(renderer);
    }
 
   }

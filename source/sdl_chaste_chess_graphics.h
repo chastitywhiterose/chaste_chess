@@ -78,15 +78,7 @@ void draw_game_scene()
  SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
  SDL_RenderFillRect(renderer,&rect);
 
- if(key_rect_shown)
- {
-  key_rect.x=kx*main_check.rectsize;
-  key_rect.y=ky*main_check.rectsize;
-  key_rect.w=main_check.rectsize;
-  key_rect.h=main_check.rectsize;
-  SDL_SetRenderDrawColor(renderer,0xFF,0x80,0x80,255);
-  SDL_RenderFillRect(renderer,&key_rect);
- }
+
 }
 
 
