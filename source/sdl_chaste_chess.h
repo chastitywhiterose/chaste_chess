@@ -217,3 +217,5 @@ void chess_grid_highlight(int x,int y)
  /*SDL_RenderFillRect(renderer,&rect);*/
 
 }
+
+
