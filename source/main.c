@@ -18,7 +18,7 @@ int kx=3,ky=3;
 int keyboard_state=0;
 int keyboard_shown=0;
 SDL_Rect key_rect;
-int piece_moved=0;
+
 
 char text[0x200],text_scale=1;
 int text_color=0xFF00FF;
