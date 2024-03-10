@@ -267,8 +267,8 @@ while(SDL_PollEvent(&e))
    if(keyboard_shown)
    {
     draw_game_scene();
-    init_highlight();
-    check_moves_of_clicked_piece();
+    chess_grid_draw_highlight();
+    /*draw_en_passant();*/
     chess_grid_draw();
 
     /*draw outline of cursor controlled by keyboard*/
