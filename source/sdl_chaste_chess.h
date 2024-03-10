@@ -72,6 +72,9 @@ struct chess_piece p;
 /*global chess piece that will be used for analyzing all data about the currently selected piece if it was clicked last time*/
 struct chess_piece ps;
 
+/*global chess piece that will be used for the en_passant rule*/
+struct chess_piece en_passant;
+
 
 struct chess_grid
 {

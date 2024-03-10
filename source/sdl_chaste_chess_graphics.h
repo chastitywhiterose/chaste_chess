@@ -84,6 +84,20 @@ void draw_game_scene()
 
 
 
+void draw_en_passant()
+{
+ if(en_passant.id=='P')
+ {
+  /*highlight the square which was clicked*/
+  rect.x=en_passant.x*main_check.rectsize;
+  rect.y=en_passant.y*main_check.rectsize;
+  rect.w=main_check.rectsize;
+  rect.h=main_check.rectsize;
+  SDL_SetRenderDrawColor(renderer,0xFF,0xFF,0x00,255);
+  SDL_RenderFillRect(renderer,&rect);
+ }
+}
+
 
 
 

@@ -61,6 +61,34 @@ void chess_square_select()
          init_highlight();
          check_moves_of_clicked_piece();
 	}
+
+/*special case for en passant*/
+if(ps.id=='P' && en_passant.id=='P')
+{
+ if(x==en_passant.x && y==en_passant.y)
+ {
+  ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
+  main_grid.array[x+y*8]=ps; /*move piece to new square*/
+  main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
+
+  main_grid.array[x+(y-dir)*8].id='0';
+
+  en_passant.id='0';
+  init_highlight(); /*clear highlights now that move is complete*/
+
+  if(turn=='W')
+  {
+   turn='B';
+   printf("White has moved. It is now Black's turn.\n");
+  }
+  else
+  {
+   turn='W';
+   printf("Black has moved. It is now White's turn.\n");
+  }
+
+ }
+}
 	
 	if(p.color!=turn || p.id=='0')
 	{
@@ -78,6 +106,18 @@ void chess_square_select()
     ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
       main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
+
+      if(x==ps.x && y==(ps.y+dir*2))
+      {
+       en_passant.id='P';
+       en_passant.x=x;
+       en_passant.y=ps.y+dir;
+       printf("en_passant marked at %d,%d\n",en_passant.x,en_passant.y);
+      }
+      else
+      {
+       en_passant.id='0';
+      }
 
       if(turn=='W')
       {
@@ -112,6 +152,7 @@ void chess_square_select()
 
   draw_game_scene();
   chess_grid_draw_highlight();
+  /*draw_en_passant();*/
   chess_grid_draw();
 
   SDL_RenderPresent(renderer);
