@@ -410,3 +410,33 @@ void check_moves_of_clicked_piece()
 }
 
 
+
+/*
+the following function is for debugging castling.
+it removes all pieces except for the kings and rooks so that I can test if castling works correctly
+*/
+
+
+void debug_castle()
+{
+ struct chess_piece t;
+
+ y=0;
+ while(y<8)
+ {
+  x=0;
+  while(x<8)
+  {
+   t=main_grid.array[x+y*8];
+   if(t.id=='B'||t.id=='N'||t.id=='Q')
+   {
+    main_grid.array[x+y*8].id='0';
+   }
+
+   x+=1;
+  }
+  y+=1;
+ }
+
+}
+
