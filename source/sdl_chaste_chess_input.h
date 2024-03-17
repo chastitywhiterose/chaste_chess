@@ -65,6 +65,18 @@ void chess_square_select()
 /*special case for en passant*/
 if(ps.id=='P' && en_passant.id=='P')
 {
+ int xdiff=0,ydiff=0;
+
+ xdiff=abs(en_passant.x-ps.x);
+ ydiff=en_passant.y-ps.y;
+
+ /*printf("Difference between selected piece and en_passant mark is %d %d\n",xdiff,ydiff);*/
+
+
+ /*this conditional makes sure that only the correct pawns capture on the en_passant square*/
+ if(xdiff==1&&ydiff==dir)
+ {
+
  if(x==en_passant.x && y==en_passant.y)
  {
   ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
@@ -87,14 +99,13 @@ if(ps.id=='P' && en_passant.id=='P')
    printf("Black has moved. It is now White's turn.\n");
   }
 
+  }
+
  }
 }
 	
 	if(p.color!=turn || p.id=='0')
 	{
-		/*ps.id='0';*/ /*deselect piece*/
-		printf("It is not this player's turn. This piece cannot be selected for move\n");
-
  /*
 	 if piece has been selected previously
 	 move it there if it has been highlighted as valid move!
@@ -244,6 +255,7 @@ while(SDL_PollEvent(&e))
     x=e.button.x;
     y=e.button.y;
     mouse_state=1;
+    keyboard_shown=0;
 
     /*printf("Mouse clicked at position X=%d Y=%d ",x,y);*/
 

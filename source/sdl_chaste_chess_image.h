@@ -89,7 +89,7 @@ void chess_grid_draw_pieces()
      }
      if(p.id=='R')
      {
-      rect.x=0*t_rect_size;
+      rect.x=7*t_rect_size;
       rect.y=0*t_rect_size;
      }
      if(p.id=='N')
@@ -99,7 +99,7 @@ void chess_grid_draw_pieces()
      }
      if(p.id=='B')
      {
-      rect.x=2*t_rect_size;
+      rect.x=5*t_rect_size;
       rect.y=0*t_rect_size;
      }
      if(p.id=='Q')
@@ -124,7 +124,7 @@ void chess_grid_draw_pieces()
      }
      if(p.id=='R')
      {
-      rect.x=0*t_rect_size;
+      rect.x=7*t_rect_size;
       rect.y=7*t_rect_size;
      }
      if(p.id=='N')
@@ -134,7 +134,7 @@ void chess_grid_draw_pieces()
      }
      if(p.id=='B')
      {
-      rect.x=2*t_rect_size;
+      rect.x=5*t_rect_size;
       rect.y=7*t_rect_size;
      }
      if(p.id=='Q')

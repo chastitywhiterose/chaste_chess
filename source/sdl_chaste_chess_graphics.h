@@ -65,9 +65,9 @@ function to draw the "game scene" which includes the checkerboard and the square
 void draw_game_scene()
 {
  /*draw the checkerboard*/
- SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
+ SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
  SDL_RenderFillRect(renderer,NULL);
- SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
+ SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
  chaste_checker();
 
  /*highlight the square which was clicked*/

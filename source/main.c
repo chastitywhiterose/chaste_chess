@@ -19,6 +19,9 @@ int keyboard_state=0;
 int keyboard_shown=0;
 SDL_Rect key_rect;
 
+/*variables for the shades of gray used for checkerboard*/
+int g0=0x55,g1=0xAA;
+
 
 char text[0x200],text_scale=1;
 int text_color=0xFF00FF;
@@ -49,6 +52,10 @@ int main(int argc, char **argv)
 
  printf("SDL Program Compiled Correctly\n");
 
+g0=0;g1=0xFF;
+
+/*g0=0x40;g1=0xC0;*/
+
  /*first step is initializing the checkerboard that is drawn every frame of the game*/
  init_checkerboard();
  main_check.rectsize=height/8;
@@ -62,7 +69,7 @@ int main(int argc, char **argv)
  /*x=load_pieces("./image/Chessboard_720_Alpha.png");
  if(x){chess_grid_draw=chess_grid_draw_pieces;}*/
 
-x=load_pieces("./image/winboard_mono_696.png");
+x=load_pieces("./image/winboard_mono_696_alpha.png");
  if(x){chess_grid_draw=chess_grid_draw_pieces;}
 
 
@@ -74,9 +81,9 @@ x=load_pieces("./image/winboard_mono_696.png");
  /*SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);*/
  /*SDL_SetRenderDrawColor(renderer,0xC0,0xC0,0xC0,255);*/
 
- SDL_SetRenderDrawColor(renderer,0xAA,0xAA,0xAA,255);
+ SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
  SDL_RenderFillRect(renderer,NULL);
- SDL_SetRenderDrawColor(renderer,0x55,0x55,0x55,255);
+ SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
  chaste_checker();
 
  main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");
