@@ -49,16 +49,26 @@ int main(int argc, char **argv)
 
  printf("SDL Program Compiled Correctly\n");
 
+ /*first step is initializing the checkerboard that is drawn every frame of the game*/
+ init_checkerboard();
+ main_check.rectsize=height/8;
+ printf("Square size of game board is %d\n",main_check.rectsize);
+
  x=IMG_Init(IMG_INIT_PNG);
  printf("IMG_Init: %d\n",x);
 
  /*image_fill("./image/Chessboard_720_Alpha.png");*/
 
- x=load_pieces("./image/Chessboard_720_Alpha.png");
+ /*x=load_pieces("./image/Chessboard_720_Alpha.png");
+ if(x){chess_grid_draw=chess_grid_draw_pieces;}*/
+
+x=load_pieces("./image/winboard_mono_696.png");
  if(x){chess_grid_draw=chess_grid_draw_pieces;}
 
- init_checkerboard();
- main_check.rectsize=height/8;
+
+
+
+
 
  /*SDL_SetRenderDrawColor(renderer,0x40,0x40,0x40,255);*/
  /*SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);*/

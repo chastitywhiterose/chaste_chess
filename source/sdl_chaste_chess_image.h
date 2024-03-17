@@ -7,6 +7,14 @@ it only works according to the one that I have specifically edited for this purp
 load the chess pieces from a 720x720 image I prepared
 */
 
+
+/*variable to store how big one square of the checkerboard in loaded image is.*/
+int t_rect_size=0;
+
+/*variable to store difference between texture squares and program squares*/
+int t_rect_diff=0;
+
+
 int load_pieces(char *filename)
 {
  int w,h;
@@ -23,6 +31,13 @@ int load_pieces(char *filename)
   SDL_QueryTexture(texture, NULL, NULL, &w, &h);
   printf("Image '%s' loaded\n",filename);
   printf("Texture dimensions w=%d,h=%d\n",w,h);
+
+  t_rect_size=w/8;
+  printf("Square size of texture is %d\n",t_rect_size);
+
+  t_rect_diff=main_check.rectsize-t_rect_size;
+  printf("Square size difference is %d\n",t_rect_diff);
+
  }
  return 1;
 }
@@ -39,12 +54,12 @@ void chess_grid_draw_pieces()
  struct chess_piece p;
  SDL_Rect rect_dst;
 
- rect.w=main_check.rectsize;
- rect.h=main_check.rectsize;
- rect_dst.w=main_check.rectsize;
- rect_dst.h=main_check.rectsize;
+ rect.w=t_rect_size;
+ rect.h=t_rect_size;
+ rect_dst.w=t_rect_size;
+ rect_dst.h=t_rect_size;
 
- /*printf("main_check.rectsize=%d\n",main_check.rectsize);*/
+ /*printf("t_rect_size=%d\n",t_rect_size);*/
 
  y=0;
  while(y<8)
@@ -69,33 +84,33 @@ void chess_grid_draw_pieces()
     {
      if(p.id=='P')
      {
-      rect.x=0*main_check.rectsize;
-      rect.y=1*main_check.rectsize;
+      rect.x=0*t_rect_size;
+      rect.y=1*t_rect_size;
      }
      if(p.id=='R')
      {
-      rect.x=0*main_check.rectsize;
-      rect.y=0*main_check.rectsize;
+      rect.x=0*t_rect_size;
+      rect.y=0*t_rect_size;
      }
      if(p.id=='N')
      {
-      rect.x=1*main_check.rectsize;
-      rect.y=0*main_check.rectsize;
+      rect.x=1*t_rect_size;
+      rect.y=0*t_rect_size;
      }
      if(p.id=='B')
      {
-      rect.x=2*main_check.rectsize;
-      rect.y=0*main_check.rectsize;
+      rect.x=2*t_rect_size;
+      rect.y=0*t_rect_size;
      }
      if(p.id=='Q')
      {
-      rect.x=3*main_check.rectsize;
-      rect.y=0*main_check.rectsize;
+      rect.x=3*t_rect_size;
+      rect.y=0*t_rect_size;
      }
      if(p.id=='K')
      {
-      rect.x=4*main_check.rectsize;
-      rect.y=0*main_check.rectsize;
+      rect.x=4*t_rect_size;
+      rect.y=0*t_rect_size;
      }
 
      
@@ -104,41 +119,41 @@ void chess_grid_draw_pieces()
     {
      if(p.id=='P')
      {
-      rect.x=0*main_check.rectsize;
-      rect.y=6*main_check.rectsize;
+      rect.x=0*t_rect_size;
+      rect.y=6*t_rect_size;
      }
      if(p.id=='R')
      {
-      rect.x=0*main_check.rectsize;
-      rect.y=7*main_check.rectsize;
+      rect.x=0*t_rect_size;
+      rect.y=7*t_rect_size;
      }
      if(p.id=='N')
      {
-      rect.x=1*main_check.rectsize;
-      rect.y=7*main_check.rectsize;
+      rect.x=1*t_rect_size;
+      rect.y=7*t_rect_size;
      }
      if(p.id=='B')
      {
-      rect.x=2*main_check.rectsize;
-      rect.y=7*main_check.rectsize;
+      rect.x=2*t_rect_size;
+      rect.y=7*t_rect_size;
      }
      if(p.id=='Q')
      {
-      rect.x=3*main_check.rectsize;
-      rect.y=7*main_check.rectsize;
+      rect.x=3*t_rect_size;
+      rect.y=7*t_rect_size;
      }
      if(p.id=='K')
      {
-      rect.x=4*main_check.rectsize;
-      rect.y=7*main_check.rectsize;
+      rect.x=4*t_rect_size;
+      rect.y=7*t_rect_size;
      }
 
 
 
     }
 
-    rect_dst.x=x1;
-    rect_dst.y=y1;
+    rect_dst.x=x1+t_rect_diff/2;
+    rect_dst.y=y1+t_rect_diff/2;
 
     SDL_RenderCopy(renderer, texture, &rect, &rect_dst);
 
@@ -146,7 +161,6 @@ void chess_grid_draw_pieces()
 
    x+=1;
   }
-  /*printf("\n"); */
   y+=1;
  }
 
