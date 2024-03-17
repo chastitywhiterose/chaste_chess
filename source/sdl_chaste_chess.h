@@ -67,7 +67,7 @@ struct chess_piece
 };
 
 /*global chess piece that will be used for analyzing all data about the recently clicked piece*/
-struct chess_piece p;
+struct chess_piece p,pt;
 
 /*global chess piece that will be used for analyzing all data about the currently selected piece if it was clicked last time*/
 struct chess_piece ps;
@@ -440,3 +440,17 @@ void debug_castle()
 
 }
 
+
+void swap_turn()
+{
+     if(turn=='W')
+      {
+       turn='B';
+       printf("White has moved. It is now Black's turn.\n");
+      }
+      else
+      {
+       turn='W';
+       printf("Black has moved. It is now White's turn.\n");
+      }
+}

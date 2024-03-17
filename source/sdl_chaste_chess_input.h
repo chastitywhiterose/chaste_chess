@@ -9,7 +9,8 @@ however, these functions are by no means independent and uses tons of global var
 
 void chess_square_select()
 {
-    p=main_grid.array[x+y*8];
+
+  p=main_grid.array[x+y*8];
 
     p.x=x;
     p.y=y;
@@ -86,23 +87,50 @@ if(ps.id=='P' && en_passant.id=='P')
   main_grid.array[x+(y-dir)*8].id='0';
 
   en_passant.id='0';
-  init_highlight(); /*clear highlights now that move is complete*/
-
-  if(turn=='W')
-  {
-   turn='B';
-   printf("White has moved. It is now Black's turn.\n");
-  }
-  else
-  {
-   turn='W';
-   printf("Black has moved. It is now White's turn.\n");
-  }
+  swap_turn();
+  init_highlight();
 
   }
 
  }
+
 }
+/*end of en passant*/
+
+
+/*special case for castling*/
+if(p.id=='0'&&ps.id=='K')
+{
+ int xdiff=0,ydiff=0;
+ int rx;
+
+ xdiff=x-ps.x;
+ ydiff=y-ps.y;
+
+ printf("Difference between selected space and selected king is %d %d\n",xdiff,ydiff);
+
+ if(xdiff==2&&ydiff==0)
+ {
+  rx=7;
+  pt=main_grid.array[rx+y*8];
+  if(pt.moves==0&&ps.moves==0)
+  {
+   main_grid.array[rx+y*8].id='0';
+   rx=5;
+   main_grid.array[rx+y*8]=pt;
+   main_grid.array[ps.x+ps.y*8].id='0';
+   main_grid.array[x+y*8]=ps;
+   swap_turn();
+   init_highlight();
+  }
+
+ }
+
+
+
+}
+/*end of castling*/
+
 	
 	if(p.color!=turn || p.id=='0')
 	{
@@ -130,16 +158,7 @@ if(ps.id=='P' && en_passant.id=='P')
        en_passant.id='0';
       }
 
-      if(turn=='W')
-      {
-       turn='B';
-       printf("White has moved. It is now Black's turn.\n");
-      }
-      else
-      {
-       turn='W';
-       printf("Black has moved. It is now White's turn.\n");
-      }
+      swap_turn();
 
     	 printf("Piece moved to %d,%d\n", x,y );
 	  ps.id='0'; /*deselect piece after move*/
@@ -147,7 +166,6 @@ if(ps.id=='P' && en_passant.id=='P')
 	 }
 	 else
 	 {
-		 ps.id='0';
 		 printf("piece can't move there\n");
 	 }
 	 
