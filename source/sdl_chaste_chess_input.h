@@ -119,11 +119,28 @@ if(p.id=='0'&&ps.id=='K')
    rx=5;
    main_grid.array[rx+y*8]=pt;
    main_grid.array[ps.x+ps.y*8].id='0';
+   ps.moves++;
    main_grid.array[x+y*8]=ps;
    swap_turn();
    init_highlight();
   }
+ }
 
+ if(xdiff==-2&&ydiff==0)
+ {
+  rx=0;
+  pt=main_grid.array[rx+y*8];
+  if(pt.moves==0&&ps.moves==0)
+  {
+   main_grid.array[rx+y*8].id='0';
+   rx=3;
+   main_grid.array[rx+y*8]=pt;
+   main_grid.array[ps.x+ps.y*8].id='0';
+   ps.moves++;
+   main_grid.array[x+y*8]=ps;
+   swap_turn();
+   init_highlight();
+  }
  }
 
 

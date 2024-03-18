@@ -38,7 +38,6 @@ SDL_Texture *texture;
 int main(int argc, char **argv)
 {
  init_main_grid();
- debug_castle();
  /*chess_grid_print();*/
  /*return 0;*/
 
