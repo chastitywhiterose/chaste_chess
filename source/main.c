@@ -30,6 +30,7 @@ SDL_Texture *texture;
 
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
+#include "sdl_chaste_chess_gamesave.h"
 #include "sdl_chaste_chess_font_texture.h"
 #include "sdl_chaste_chess_image.h"
 #include "sdl_chaste_chess_graphics.h"
