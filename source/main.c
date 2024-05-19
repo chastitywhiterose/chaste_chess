@@ -2,12 +2,16 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-int width=720,height=720;
+int width=1280,height=720;
 int loop=1;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Event e;
 SDL_Rect rect;
+
+/*location of checkerboard variables*/
+/*these are initialized to random values to be fixed later*/
+int check_left=0,check_top=0,check_size=720;
 
 /*mouse variables*/
 int x,y,x1,y1;
@@ -53,13 +57,27 @@ int main(int argc, char **argv)
 
  printf("SDL Program Compiled Correctly\n");
 
-g0=0;g1=0xFF;
+/*g0=0;g1=0xFF;*/
 
 /*g0=0x40;g1=0xC0;*/
 
  /*first step is initializing the checkerboard that is drawn every frame of the game*/
  init_checkerboard();
+
  main_check.rectsize=height/8;
+
+ check_size=main_check.rectsize*8;
+
+ check_left=(width-check_size)/2;
+ check_top=0;
+
+
+ main_check.x_begin=check_left;
+ main_check.y_begin=check_top;
+ main_check.x_end=main_check.x_begin+main_check.rectsize*8;
+ main_check.y_end=height;
+
+
  printf("Square size of game board is %d\n",main_check.rectsize);
 
  x=IMG_Init(IMG_INIT_PNG);
@@ -67,11 +85,17 @@ g0=0;g1=0xFF;
 
  /*image_fill("./image/Chessboard_720_Alpha.png");*/
 
- /*x=load_pieces("./image/Chessboard_720_Alpha.png");
- if(x){chess_grid_draw=chess_grid_draw_pieces;}*/
+ x=0;
 
-x=load_pieces("./image/winboard_mono_696_alpha.png");
- if(x){chess_grid_draw=chess_grid_draw_pieces;}
+ /*x=load_pieces("./image/winboard_mono_696_alpha.png");*/
+
+ if(x) /*if load was successful, change the function pointer to draw pieces instead of letters*/
+ {
+  chess_grid_draw=chess_grid_draw_pieces;
+  /*g0=0;g1=0xFF;*/
+ }
+
+
 
 
 
@@ -82,9 +106,9 @@ x=load_pieces("./image/winboard_mono_696_alpha.png");
  /*SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);*/
  /*SDL_SetRenderDrawColor(renderer,0xC0,0xC0,0xC0,255);*/
 
- SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
+ SDL_SetRenderDrawColor(renderer,0,0,0,255);
  SDL_RenderFillRect(renderer,NULL);
- SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
+
  chaste_checker();
 
  main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");

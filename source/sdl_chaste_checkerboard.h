@@ -43,10 +43,17 @@ void chaste_checker()
   x=main_check.x_begin;
   while(x<main_check.x_end)
   {
+
+   rect.x=x;
+   rect.y=y;
    if(index==1)
    {
-    rect.x=x;
-    rect.y=y;
+    SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
+    SDL_RenderFillRect(renderer,&rect);
+   }
+   if(index==0)
+   {
+    SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
     SDL_RenderFillRect(renderer,&rect);
    }
    index^=1;

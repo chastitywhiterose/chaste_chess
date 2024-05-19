@@ -358,6 +358,9 @@ while(SDL_PollEvent(&e))
     mouse_state=1;
     keyboard_shown=0;
 
+    if(x<check_left){printf("Mouse clicked too far left outside of board\n");return;}
+    if(x>check_left+check_size){printf("Mouse clicked too far right outside of board\n");return;}
+
     /*printf("Mouse clicked at position X=%d Y=%d ",x,y);*/
 
     /*if(e.button.button==SDL_BUTTON_LEFT){printf("SDL_BUTTON_LEFT");}
@@ -365,8 +368,10 @@ while(SDL_PollEvent(&e))
     if(e.button.button==SDL_BUTTON_MIDDLE){printf("SDL_BUTTON_MIDDLE");}
     printf("\n");*/
 
-    x=x/main_check.rectsize;
+
+    x=(x-check_left)/main_check.rectsize;
     y=y/main_check.rectsize;
+
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
     /*printf("Chess Square clicked: %c %d\n",'A'+x,8-y);*/

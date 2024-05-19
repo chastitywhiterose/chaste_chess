@@ -39,7 +39,7 @@ void chess_grid_draw_text()
     if(p.color=='B'){text_color=0x000000;}
     if(p.color=='W'){text_color=0xFFFFFF;}
 
-   chaste_font_draw_string_scaled_alpha(text,x1+x2,y1+x2,text_scale);
+   chaste_font_draw_string_scaled_alpha(text,check_left+x1+x2,y1+x2,text_scale);
    }
 
    x+=1;
@@ -65,13 +65,14 @@ function to draw the "game scene" which includes the checkerboard and the square
 void draw_game_scene()
 {
  /*draw the checkerboard*/
- SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
+
+ SDL_SetRenderDrawColor(renderer,0,0,0,255);
  SDL_RenderFillRect(renderer,NULL);
- SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
+
  chaste_checker();
 
  /*highlight the square which was clicked*/
- rect.x=x*main_check.rectsize;
+ rect.x=check_left+x*main_check.rectsize;
  rect.y=y*main_check.rectsize;
  rect.w=main_check.rectsize;
  rect.h=main_check.rectsize;
@@ -137,7 +138,7 @@ void chess_grid_draw_highlight()
      SDL_SetRenderDrawColor(renderer,0x00,0x00,0xFF,255);
     }
 
-    rect.x=x*main_check.rectsize;
+    rect.x=check_left+x*main_check.rectsize;
     rect.y=y*main_check.rectsize;
     rect.w=main_check.rectsize;
     rect.h=main_check.rectsize;
