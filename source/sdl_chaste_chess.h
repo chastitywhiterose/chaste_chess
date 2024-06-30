@@ -103,6 +103,29 @@ void init_main_grid()
 
 }
 
+int view_flipped=0;
+
+void flip_main_grid()
+{
+ struct chess_grid temp_grid;
+
+ temp_grid=main_grid;
+
+ y=0;
+ while(y<8)
+ {
+  x=0;
+  while(x<8)
+  {
+   main_grid.array[x+y*8]=temp_grid.array[(7-x)+(7-y)*8];
+   x+=1;
+  }
+  y+=1;
+ }
+
+ view_flipped^=1;
+}
+
 
 
 void chess_grid_print()
@@ -317,6 +340,9 @@ void check_moves_of_clicked_piece()
      /*set direction of pawn based on whose turn it is*/
      if(p.color=='B'){dir=1;} 
      if(p.color=='W'){dir=-1;}
+
+     /*but if view is flipped, reverse the direction so it is correct*/
+     if(view_flipped)(dir=-dir);
 
      /*these next two sections of conditionals make sure that pawns move forward only onto blank spaces but can't capture pieces directly in front of them because this is not legal in chess.*/
 

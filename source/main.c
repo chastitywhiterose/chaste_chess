@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 
 /*g0=0;g1=0xFF;*/
 
-/*g0=0x40;g1=0xC0;*/
+ g0=0x40;g1=0xC0;
 
  /*first step is initializing the checkerboard that is drawn every frame of the game*/
  init_checkerboard();

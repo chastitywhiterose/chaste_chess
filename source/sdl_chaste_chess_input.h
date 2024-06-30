@@ -227,6 +227,7 @@ while(SDL_PollEvent(&e))
     {
      init_main_grid();
      turn='W';
+     view_flipped=0;
      draw_game_scene();
      chess_grid_draw();
      SDL_RenderPresent(renderer);
@@ -274,6 +275,13 @@ while(SDL_PollEvent(&e))
      x=kx;
      y=ky;
      chess_square_select();
+    break;
+
+    case SDLK_v:
+     flip_main_grid();
+     draw_game_scene();
+     chess_grid_draw();
+     SDL_RenderPresent(renderer);
     break;
 
    /*keys after this are for managing save states*/
@@ -390,7 +398,7 @@ while(SDL_PollEvent(&e))
     chess_grid_draw();
 
     /*draw outline of cursor controlled by keyboard*/
-    key_rect.x=kx*main_check.rectsize;
+    key_rect.x=kx*main_check.rectsize+check_left;
     key_rect.y=ky*main_check.rectsize;
     key_rect.w=main_check.rectsize;
     key_rect.h=main_check.rectsize;
