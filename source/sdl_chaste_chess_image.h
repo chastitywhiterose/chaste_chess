@@ -152,7 +152,7 @@ void chess_grid_draw_pieces()
 
     }
 
-    rect_dst.x=x1+t_rect_diff/2;
+    rect_dst.x=check_left+x1+t_rect_diff/2;
     rect_dst.y=y1+t_rect_diff/2;
 
     SDL_RenderCopy(renderer, texture, &rect, &rect_dst);

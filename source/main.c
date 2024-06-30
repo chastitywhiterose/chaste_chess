@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
  x=0;
 
- /*x=load_pieces("./image/winboard_mono_696_alpha.png");*/
+ x=load_pieces("./image/Chastity Chess Set Merida 720_alpha.png");
 
  if(x) /*if load was successful, change the function pointer to draw pieces instead of letters*/
  {
