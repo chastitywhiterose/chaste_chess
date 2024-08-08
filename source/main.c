@@ -32,6 +32,10 @@ int text_color=0xFF00FF;
 
 SDL_Texture *texture;
 
+/*chess notation variables*/
+int square_file;
+int square_rank;
+
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
 #include "sdl_chaste_chess_gamesave.h"

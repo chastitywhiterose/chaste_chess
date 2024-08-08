@@ -79,6 +79,10 @@ void draw_game_scene()
  SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);
  SDL_RenderFillRect(renderer,&rect);
 
+ text_color=0xFFFFFF;
+ text_scale=6;
+ sprintf(text,"%c%d\n",square_file,square_rank);
+ chaste_font_draw_string_scaled_alpha(text,main_check.rectsize,main_check.rectsize,text_scale);
 
 }
 

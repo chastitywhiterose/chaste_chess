@@ -17,7 +17,7 @@ void chess_square_select()
 
     /*print information on the square selected, including what piece.*/
 
-    printf("%c %d: ",'A'+x,8-y);
+    printf("%c%d: ",square_file,square_rank);
 
     if(p.id=='0')
     {
@@ -380,9 +380,21 @@ while(SDL_PollEvent(&e))
     x=(x-check_left)/main_check.rectsize;
     y=y/main_check.rectsize;
 
+    
+
+    if(view_flipped!=0)
+    {
+     square_rank=y+1;
+     square_file='H'-x;
+    }
+    else
+    {
+     square_rank=8-y;
+     square_file='A'+x;
+    }
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
-    /*printf("Chess Square clicked: %c %d\n",'A'+x,8-y);*/
+    printf("Chess Square clicked: %c%d\n",square_file,square_rank);
    }
 
    if(mouse_state)
