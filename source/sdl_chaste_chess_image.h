@@ -150,13 +150,14 @@ void chess_grid_draw_pieces()
     x1=x*main_check.rectsize;
     y1=y*main_check.rectsize;
 
-     if(p.color=='B')
- {
-  if(p.id=='P')
-  {
-   rect.x=0*t_rect_size;
-   rect.y=1*t_rect_size;
-  }
+    /*beginning of piece source selection*/
+    if(p.color=='B')
+    {
+     if(p.id=='P')
+     {
+      rect.x=0*t_rect_size;
+      rect.y=1*t_rect_size;
+     }
      if(p.id=='R')
      {
       rect.x=7*t_rect_size;
@@ -183,7 +184,6 @@ void chess_grid_draw_pieces()
       rect.y=0*t_rect_size;
      }
     }
-
 
     if(p.color=='W')
     {
@@ -217,7 +217,8 @@ void chess_grid_draw_pieces()
       rect.x=4*t_rect_size;
       rect.y=7*t_rect_size;
      }
- }
+    }
+    /*end of piece source selection*/
  
     rect_dst.x=check_left+x1+t_rect_diff/2;
     rect_dst.y=y1+t_rect_diff/2;

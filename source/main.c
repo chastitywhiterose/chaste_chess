@@ -7,7 +7,7 @@ int loop=1;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Event e;
-SDL_Rect rect,rect_dst;
+SDL_Rect rect,rect_dst,rect_src;
 
 /*location of checkerboard variables*/
 /*these are initialized to random values to be fixed later*/

@@ -184,8 +184,83 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
  rect.w=main_check.rectsize;
  rect.h=main_check.rectsize;
 
+ rect_src.w=main_check.rectsize;
+ rect_src.h=main_check.rectsize;
+
  delay=1000/fps;
- SDL_SetRenderDrawColor(renderer,128,128,128,255);
+ SDL_SetRenderDrawColor(renderer,255,0,255,255);
+    
+
+    /*beginning of piece source selection*/
+
+    if(ps.color=='B')
+    {
+     if(ps.id=='P')
+     {
+      rect_src.x=0*t_rect_size;
+      rect_src.y=1*t_rect_size;
+     }
+     if(ps.id=='R')
+     {
+      rect_src.x=7*t_rect_size;
+      rect_src.y=0*t_rect_size;
+     }
+     if(ps.id=='N')
+     {
+      rect_src.x=1*t_rect_size;
+      rect_src.y=0*t_rect_size;
+     }
+     if(ps.id=='B')
+     {
+      rect_src.x=5*t_rect_size;
+      rect_src.y=0*t_rect_size;
+     }
+     if(ps.id=='Q')
+     {
+      rect_src.x=3*t_rect_size;
+      rect_src.y=0*t_rect_size;
+     }
+     if(ps.id=='K')
+     {
+      rect_src.x=4*t_rect_size;
+      rect_src.y=0*t_rect_size;
+     }
+    }
+
+    if(ps.color=='W')
+    {
+     if(ps.id=='P')
+     {
+      rect_src.x=0*t_rect_size;
+      rect_src.y=6*t_rect_size;
+     }
+     if(ps.id=='R')
+     {
+      rect_src.x=7*t_rect_size;
+      rect_src.y=7*t_rect_size;
+     }
+     if(ps.id=='N')
+     {
+      rect_src.x=1*t_rect_size;
+      rect_src.y=7*t_rect_size;
+     }
+     if(ps.id=='B')
+     {
+      rect_src.x=5*t_rect_size;
+      rect_src.y=7*t_rect_size;
+     }
+     if(ps.id=='Q')
+     {
+      rect_src.x=3*t_rect_size;
+      rect_src.y=7*t_rect_size;
+     }
+     if(ps.id=='K')
+     {
+      rect_src.x=4*t_rect_size;
+      rect_src.y=7*t_rect_size;
+     }
+    }
+    /*end of piece source selection*/
 
  while(rect.x!=x2 || rect.y!=y2)
  {
@@ -195,9 +270,12 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
 
   rect.x+=x_step;
   rect.y+=y_step;
-  printf("rectangle at = %d,%d\n",rect.x,rect.y);
+  /*printf("rectangle at = %d,%d\n",rect.x,rect.y);*/
 
   SDL_RenderFillRect(renderer,&rect);
+
+  SDL_RenderCopy(renderer, texture, &rect_src, &rect);
+
   SDL_RenderPresent(renderer);
 
   /*time loop used to slow the game down so users can see it*/
