@@ -13,9 +13,12 @@ SDL_Rect rect;
 /*these are initialized to random values to be fixed later*/
 int check_left=0,check_top=0,check_size=720;
 
-/*mouse variables*/
-int x,y,x1,y1;
+/*mouse and coordinate variables*/
+int x,y,x1,y1,x2,y2;
 int mouse_state=0;
+
+/*variables for possible piece slide animation*/
+int x_step,y_step;
 
 /*keyboard variables*/
 int kx=3,ky=3;

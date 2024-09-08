@@ -163,6 +163,34 @@ if(p.id=='0'&&ps.id=='K')
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
       main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
 
+x1=ps.x*main_check.rectsize;
+y1=ps.y*main_check.rectsize;
+x2=x*main_check.rectsize;
+y2=y*main_check.rectsize;
+
+
+printf("Moving Piece %c\n",ps.id);
+printf("From pixel location %d,%d\n",x1,y1);
+printf("To pixel location %d,%d\n",x2,y2);
+
+x_step=x-ps.x;
+y_step=y-ps.y;
+printf("x_step = %d y_step = %d\n",x_step,y_step);
+
+/*beginning of slide animation*/
+
+ rect.x=x1;
+ rect.y=y1;
+ rect.w=main_check.rectsize;
+ rect.h=main_check.rectsize;
+
+ while(rect.x!=x2 || rect.y!=y2)
+ {
+  rect.x+=x_step;
+  rect.y+=y_step;
+  printf("rectangle at = %d,%d\n",rect.x,rect.y);
+ }
+
       if(x==ps.x && y==(ps.y+dir*2))
       {
        en_passant.id='P';
