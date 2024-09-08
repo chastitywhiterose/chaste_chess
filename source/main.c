@@ -7,7 +7,7 @@ int loop=1;
 SDL_Window *window;
 SDL_Renderer *renderer;
 SDL_Event e;
-SDL_Rect rect;
+SDL_Rect rect,rect_dst;
 
 /*location of checkerboard variables*/
 /*these are initialized to random values to be fixed later*/
@@ -19,6 +19,7 @@ int mouse_state=0;
 
 /*variables for possible piece slide animation*/
 int x_step,y_step;
+int sdl_time,sdl_time1,delay,fps=60;
 
 /*keyboard variables*/
 int kx=3,ky=3;
