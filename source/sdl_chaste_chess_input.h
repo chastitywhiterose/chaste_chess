@@ -8,19 +8,29 @@ however, these functions are by no means independent and uses tons of global var
 
 void move_piece()
 {
+ int i;
 
       /*start of moving piece from one location to another*/
 
 		square_file_dest=square_file;
 		square_rank_dest=square_rank;
 
-      move_log[move_index]=ps.id;move_index++;
-      move_log[move_index]=square_file_dest;move_index++;
-      move_log[move_index]=square_rank_dest;move_index++;
-      move_log[move_index]=p.id;move_index++;
-      move_log[move_index]=square_file_dest;move_index++;
-      move_log[move_index]=square_rank_dest;move_index++;
+      move_log[move_index+0]=ps.id;
+      move_log[move_index+1]=square_file_source;
+      move_log[move_index+2]=square_rank_source;
+      move_log[move_index+3]=p.id;
+      move_log[move_index+4]=square_file_dest;
+      move_log[move_index+5]=square_rank_dest;
 
+      i=0;
+      while(i<6)
+      {
+       putchar(move_log[move_index+i]);
+       i++;
+      }
+      putchar('\n');
+
+      move_index+=6;
 
       ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
@@ -185,7 +195,7 @@ void chess_square_select()
 
     /*print information on the square selected, including what piece.*/
 
-    printf("%c%d: ",square_file,square_rank);
+    printf("%c%c: ",square_file,square_rank);
 
     if(p.id=='0')
     {
@@ -556,7 +566,7 @@ while(SDL_PollEvent(&e))
 
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
-    printf("Chess Square clicked: %c%d\n",square_file,square_rank);
+    printf("Chess Square clicked: %c%c\n",square_file,square_rank);
    }
 
    if(mouse_state)
