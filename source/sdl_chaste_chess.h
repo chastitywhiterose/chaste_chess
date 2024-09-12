@@ -226,7 +226,7 @@ void chess_grid_highlight(int x,int y)
   /*SDL_SetRenderDrawColor(renderer,0x00,0x00,0xFF,255);*/
   /*
    same color as moving piece
-   can't capture this piece or move beyond it
+   can capture this piece
   */
   highlight[x+y*8]=2;
   highloop=0;

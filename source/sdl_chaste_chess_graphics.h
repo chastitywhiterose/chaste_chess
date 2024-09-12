@@ -80,10 +80,9 @@ void draw_game_scene()
  SDL_RenderFillRect(renderer,&rect);
 
  text_color=0xFFFFFF;
- text_scale=6;
- sprintf(text,"%c%d\n",square_file_source,square_rank_source);
- chaste_font_draw_string_scaled_alpha(text,main_check.rectsize,main_check.rectsize,text_scale);
-
+ text_scale=4;
+ sprintf(text,"%c%c->%c%c\n",square_file_source,square_rank_source,square_file_dest,square_rank_dest);
+ chaste_font_draw_string_scaled_alpha(text,main_font.char_width*text_scale*1,main_check.rectsize,text_scale);
 }
 
 

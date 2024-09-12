@@ -47,8 +47,25 @@ int square_file_dest; /*A to H*/
 int square_rank_dest; /*1 to 8*/
 
 
-/*large array to store moves*/
+/*
+ large array to store moves
+ each move is stored as 6 bytes as follows
+
+ [0] ID of the source piece
+ [1] File of the Source Square
+ [2] Rank of the Source Square
+ [3] ID of the Destination piece
+ [4] File of the Destination Square
+ [5] Rank of the Destination Square
+
+However, the code to manage this is far from complete!
+
+*/
+
+
+
 char move_log[0x1000000];
+int move_index=0;
 
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
