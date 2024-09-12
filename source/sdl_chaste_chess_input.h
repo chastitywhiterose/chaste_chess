@@ -59,8 +59,11 @@ void chess_square_select()
 		ps=p;
 		printf("This piece has been selected for possible move\n");
 
-         init_highlight();
-         check_moves_of_clicked_piece();
+		square_file_source=square_file;
+		square_rank_source=square_rank;
+
+        init_highlight();
+        check_moves_of_clicked_piece();
 	}
 
 /*special case for en passant*/
@@ -331,6 +334,19 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
 
 
 
+void get_rank_and_file()
+{
+ if(view_flipped!=0)
+ {
+  square_rank=y+1;
+  square_file='H'-x;
+ }
+ else
+ {
+  square_rank=8-y;
+  square_file='A'+x;
+ }
+}
 
 
 
@@ -503,18 +519,8 @@ while(SDL_PollEvent(&e))
     x=(x-check_left)/main_check.rectsize;
     y=y/main_check.rectsize;
 
-    
+    get_rank_and_file();
 
-    if(view_flipped!=0)
-    {
-     square_rank=y+1;
-     square_file='H'-x;
-    }
-    else
-    {
-     square_rank=8-y;
-     square_file='A'+x;
-    }
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
     printf("Chess Square clicked: %c%d\n",square_file,square_rank);

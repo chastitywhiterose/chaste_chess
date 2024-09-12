@@ -37,8 +37,18 @@ int text_color=0xFF00FF;
 SDL_Texture *texture;
 
 /*chess notation variables*/
-int square_file;
-int square_rank;
+int square_file; /*A to H*/
+int square_rank; /*1 to 8*/
+
+int square_file_source; /*A to H*/
+int square_rank_source; /*1 to 8*/
+
+int square_file_dest; /*A to H*/
+int square_rank_dest; /*1 to 8*/
+
+
+/*large array to store moves*/
+char move_log[0x1000000];
 
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"

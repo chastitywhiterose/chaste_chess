@@ -81,7 +81,7 @@ void draw_game_scene()
 
  text_color=0xFFFFFF;
  text_scale=6;
- sprintf(text,"%c%d\n",square_file,square_rank);
+ sprintf(text,"%c%d\n",square_file_source,square_rank_source);
  chaste_font_draw_string_scaled_alpha(text,main_check.rectsize,main_check.rectsize,text_scale);
 
 }
