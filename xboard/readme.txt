@@ -1,0 +1,1 @@
+Chaste Chess does not use any engines, however, I have been researching the best engines available and also which programs are best to play Chess, Shogi, and Xiangqi. So far, xboard has been the most successful. It is open source and has been around for a long time. So I am uploading anything relevant to this folder.
