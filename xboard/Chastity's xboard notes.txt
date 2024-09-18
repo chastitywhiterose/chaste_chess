@@ -1,0 +1,45 @@
+Engines I have installed.
+
+/usr/games/stockfish (doesn't work with xboard, will look into this)
+/usr/games/fairy-stockfish
+/usr/games/gnuchess
+
+Common commands to run xboard on my system with the game settings I want.
+
+
+xboard -fcp "/usr/games/stockfish"
+
+xboard -fcp "/usr/games/fairy-stockfish"
+
+xboard -fcp "/usr/games/gnuchess"
+
+
+
+----
+Commands proven to work on my Linux system to play the games I want.
+
+
+xboard -fcp "/usr/games/fairy-stockfish" -variant chess
+xboard -fcp "/usr/games/fairy-stockfish" -variant shogi
+xboard -fcp "/usr/games/fairy-stockfish" -variant xiangqi
+
+
+---
+
+On Windows, the same principle applies but it is called winboard and you must put it in your path manually or be in that directory to run a command.
+
+For example:
+
+winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant shogi
+
+A better example is to customize the depth of which the engine searches for its moves.
+
+winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant shogi -depth 1
+
+Or specifying a time limit for the computer to choose its move.
+
+Because xboard/winboard does not seem to have a dialog option to turn off the clock, you can instead use the "-xclock" flag to the command to turn off the clock entirely. This is the best thing to do because playing without a time limit is much more relaxing!
+
+winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant normal -xclock -depth 1
+winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant shogi -xclock -depth 1
+winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant xiangqi -xclock -depth 1
