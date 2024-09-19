@@ -1,0 +1,20 @@
+YaneuraOu
+
+YaneuraOu is the world's strongest Shogi engine. One of the things that makes it difficult to get started using is that the documentation is all in Japanese and I rely on the web browser translating instructions from the wiki.
+
+https://github.com/yaneurao/YaneuraOu/wiki
+
+What makes YaneuraOu such an interesting engine is that it is used for the site lishogi.org. If you play against the level 2 or higher computer, you are playing against the YaneuraOu engine. This is how I found out about it in the first place.
+
+However, there are a lot of different executable files in the archive that can be downloaded. The instructions are only so helpful because I don't know what the difference is between a KKPT, KPPT, or an NNUE. These are the advanced terms that chess engine developers know that I don't.
+
+I can't tell you if what I am doing is correct, but I will document exactly what I did.
+
+I selected the file "YaneuraOu_KPP_KKPT-V830Git_AVX2.exe" because it was the first in the list. I also knew that my CPU supports AVX2 instructions (whatever that means) because I was also using the AVX2 version of stockfish. So theoretically it should work.
+
+winboard -fcp "C:\YaneuraOu\YaneuraOu_KPP_KKPT-V830Git_AVX2.exe" -fUSI -variant shogi -xclock -depth 1
+
+However, it didn't work exactly. It crashed and I don't know why. I will try different things later.
+
+
+
