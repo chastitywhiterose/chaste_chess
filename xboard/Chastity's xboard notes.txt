@@ -43,3 +43,11 @@ Because xboard/winboard does not seem to have a dialog option to turn off the cl
 winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant normal -xclock -depth 1
 winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant shogi -xclock -depth 1
 winboard -fcp "C:\stockfish\fairy-stockfish.exe" -variant xiangqi -xclock -depth 1
+
+
+Using regular stockfish:
+
+I discovered that it is possible to use regular stockfish if you pass the "-fUCI" flag to it when selecting it as the first chess program. This lets xboard know that the engine uses UCI protocol instead of the xboard protocol that other engines sometimes use.
+
+winboard -fcp "C:\stockfish\stockfish.exe" -fUCI -variant normal -xclock -depth 1
+
