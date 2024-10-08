@@ -287,11 +287,12 @@ if(ps.id=='P' && en_passant.id=='P')
 
   /*main_grid.array[x+y*8]=ps;*/ /*move piece to new square*/
   /*main_grid.array[ps.x+ps.y*8].id='0';*/ /*clear previous square*/
+  /*swap_turn();*/
 
   main_grid.array[x+(y-dir)*8].id='0';
 
   en_passant.id='0';
-  swap_turn();
+  
   init_highlight();
 
   }
