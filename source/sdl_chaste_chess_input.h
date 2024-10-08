@@ -265,8 +265,15 @@ if(ps.id=='P' && en_passant.id=='P')
  if(x==en_passant.x && y==en_passant.y)
  {
   ps.moves++; /*must add to move counter for piece or pawns will not be correct*/
-  main_grid.array[x+y*8]=ps; /*move piece to new square*/
-  main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
+
+  move_piece();
+
+  /*
+   the following two statements are commented out because move_piece takes care of them. I keep them for special legacy reasons though.
+  */
+
+  /*main_grid.array[x+y*8]=ps;*/ /*move piece to new square*/
+  /*main_grid.array[ps.x+ps.y*8].id='0';*/ /*clear previous square*/
 
   main_grid.array[x+(y-dir)*8].id='0';
 
@@ -333,31 +340,24 @@ if(p.id=='0'&&ps.id=='K')
 /*end of castling*/
 
 	
-	if(p.color!=turn || p.id=='0')
-	{
-
-     
-
- /*
+   if(p.color!=turn || p.id=='0')
+   {
+     /*
 	 if piece has been selected previously
 	 move it there if it has been highlighted as valid move!
-	*/
+	 */
 	if(ps.id!='0')
 	{
 	 if(highlight[x+y*8]>0)
 	 {
       move_piece();
-
 	 }
 	 else
 	 {
 		 printf("piece can't move there\n");
 	 }
-	 
 	}
-
-
-	}
+   }
 
       
 	
