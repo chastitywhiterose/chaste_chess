@@ -9,6 +9,7 @@ however, these functions are by no means independent and uses tons of global var
 void move_piece()
 {
  int i;
+ Uint32 pixel,r,g,b;
 
       /*start of moving piece from one location to another*/
 
@@ -61,6 +62,7 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
  rect_src.h=main_check.rectsize;
 
  delay=1000/fps;
+
  SDL_SetRenderDrawColor(renderer,255,0,255,255);
     
 
@@ -144,6 +146,17 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
   rect.x+=x_step;
   rect.y+=y_step;
   /*printf("rectangle at = %d,%d\n",rect.x,rect.y);*/
+
+  /*start of special color section*/
+      pixel=chaste_palette[chaste_palette_index];
+      
+      r=(pixel&0xFF0000)>>16;
+      g=(pixel&0x00FF00)>>8;
+      b=(pixel&0x0000FF);
+      
+      SDL_SetRenderDrawColor(renderer,r,g,b,255);
+      chaste_next_color();
+  /*end of special color section*/
 
   SDL_RenderFillRect(renderer,&rect);
 

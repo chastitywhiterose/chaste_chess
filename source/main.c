@@ -70,7 +70,9 @@ int move_index=0;
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
 #include "sdl_chaste_chess_gamesave.h"
+#include "chaste_the_rainbow.h"
 #include "sdl_chaste_chess_font_texture.h"
+#include "sdl_chaste_chess_font_texture_special.h"
 #include "sdl_chaste_chess_image.h"
 #include "sdl_chaste_chess_graphics.h"
 #include "sdl_chaste_chess_input.h"
@@ -146,19 +148,32 @@ int main(int argc, char **argv)
 
  chaste_checker();
 
+ /*before beginning the game, load the colors*/
+ chaste_palette_rainbow(40);
+ /*chaste_palette_rainbow_pastel(80);*/
+ /*chaste_palette_view();*/
+
+ /*then we must load the font*/
  main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");
 
- text_scale=8;
+ text_scale=15;
  text_color=0x00FF00;
 
- /*sprintf(text,"Chaste\nChess");
- chaste_font_draw_string_scaled_alpha(text,100,100,text_scale);*/
+ sprintf(text,"Chaste\nChess");
+
+ x=check_left+main_check.rectsize*0+15;
+ y=main_check.rectsize*2+60;
+
+ chaste_font_draw_string_scaled_alpha(text,x,y,text_scale);
+
+chaste_font_draw_string_scaled_special(text,x,y,text_scale);
 
  chess_grid_draw();
 
  SDL_RenderPresent(renderer);
 
  ps.id='0'; /*the id of the selected piece is '0' at the start of the game to signal that no piece is currently selected*/
+
 
  loop=1;
  while(loop)
