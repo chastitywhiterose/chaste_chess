@@ -45,3 +45,14 @@ void pgn_chaste_chess_demo()
  /*printf("last char = %d",c);*/
 
 }
+
+
+
+
+
+void pgn_chaste_chess_demo_1()
+{
+ move("d4");
+ move("d5");
+ move("c4");
+}

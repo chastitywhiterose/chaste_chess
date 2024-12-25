@@ -76,6 +76,9 @@ int move_index=0;
 #include "pgn_chaste_checkerboard.h"
 #include "pgn_chaste_chess.h"
 #include "pgn_chaste_chess_pieces.h"
+
+#include "pgn_chaste_chess_moves.h"
+
 #include "pgn_chaste_chess_demo.h"
 
 /*
@@ -92,14 +95,14 @@ int main(int argc, char **argv)
 {
  init_main_grid();
 
- pgn_chaste_chess_demo();
+ pgn_chaste_chess_demo_1();
 
- return 0;
 
- printf("Initial state of the chessboard\n");
+
+ /*printf("Initial state of the chessboard\n");*/
  chess_grid_print();
 
-
+ return 0;
 
  /*return 0;*/
 
