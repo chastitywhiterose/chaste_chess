@@ -138,6 +138,12 @@ int main(int argc, char **argv)
 
  chaste_checker();
 
+ printf("First, we load the pawns. Arguably the most important Chess pieces.\n");
+ load_pawns();
+ load_rooks();
+
+ chess_draw_pieces();
+
 
  SDL_RenderPresent(renderer);
 
