@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <math.h>
+#include <ctype.h>
+
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -70,6 +76,7 @@ int move_index=0;
 #include "pgn_chaste_checkerboard.h"
 #include "pgn_chaste_chess.h"
 #include "pgn_chaste_chess_pieces.h"
+#include "pgn_chaste_chess_demo.h"
 
 /*
 #include "sdl_chaste_chess_gamesave.h"
@@ -85,8 +92,15 @@ int main(int argc, char **argv)
 {
  init_main_grid();
 
+ pgn_chaste_chess_demo();
+
+ return 0;
+
  printf("Initial state of the chessboard\n");
  chess_grid_print();
+
+
+
  /*return 0;*/
 
  if(SDL_Init(SDL_INIT_VIDEO))
