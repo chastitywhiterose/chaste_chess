@@ -95,15 +95,14 @@ int main(int argc, char **argv)
 {
  init_main_grid();
 
- pgn_chaste_chess_demo_1();
+ /*pgn_chaste_chess_demo_1();*/
 
 
 
  /*printf("Initial state of the chessboard\n");*/
  chess_grid_print();
 
- return 0;
-
+ 
  /*return 0;*/
 
  if(SDL_Init(SDL_INIT_VIDEO))
@@ -169,16 +168,28 @@ int main(int argc, char **argv)
 
  SDL_RenderPresent(renderer);
 
+
+
  loop=1;
  while(loop)
  {
-
   while(SDL_PollEvent(&e))
   {
    if(e.type==SDL_QUIT){loop=0;}
    if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
   }
+ }
 
+ pgn_chaste_chess_demo_2();
+
+ loop=1;
+ while(loop)
+ {
+  while(SDL_PollEvent(&e))
+  {
+   if(e.type==SDL_QUIT){loop=0;}
+   if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
+  }
  }
 
  SDL_DestroyRenderer(renderer);

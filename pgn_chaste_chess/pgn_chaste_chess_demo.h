@@ -55,4 +55,18 @@ void pgn_chaste_chess_demo_1()
  move("d4");
  move("d5");
  move("c4");
+ move("Nf6");
+}
+
+/*
+using the easy API that ignores standard notation
+
+*/
+void pgn_chaste_chess_demo_2()
+{
+ move_xy(4,7,6,3);
+ move_xy(7,7,0,0);
+
+ move_xy(2,0,5,7);
+
 }

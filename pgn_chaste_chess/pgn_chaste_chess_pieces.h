@@ -127,7 +127,7 @@ void chess_draw_pieces()
  struct chess_piece p;
  SDL_Rect rect_dst;
 
- printf("t_rect_size=%d\n",t_rect_size);
+ /*printf("t_rect_size=%d\n",t_rect_size);*/
 
  rect_dst.w=t_rect_size;
  rect_dst.h=t_rect_size;
