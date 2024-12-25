@@ -138,9 +138,14 @@ int main(int argc, char **argv)
 
  chaste_checker();
 
- printf("First, we load the pawns. Arguably the most important Chess pieces.\n");
+ /*printf("First, we load the pawns. Arguably the most important Chess pieces.\n");*/
+
  load_pawns();
  load_rooks();
+ load_knights();
+ load_bishops();
+ load_queens();
+ load_kings();
 
  chess_draw_pieces();
 

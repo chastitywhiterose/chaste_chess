@@ -77,6 +77,48 @@ void load_rooks()
  rook_black=load_piece("./piece/90/bR.png");
 }
 
+SDL_Texture *knight_white;
+SDL_Texture *knight_black;
+
+void load_knights()
+{
+ knight_white=load_piece("./piece/90/wN.png");
+ knight_black=load_piece("./piece/90/bN.png");
+}
+
+SDL_Texture *bishop_white;
+SDL_Texture *bishop_black;
+
+void load_bishops()
+{
+ bishop_white=load_piece("./piece/90/wB.png");
+ bishop_black=load_piece("./piece/90/bB.png");
+}
+
+
+SDL_Texture *queen_white;
+SDL_Texture *queen_black;
+
+void load_queens()
+{
+ queen_white=load_piece("./piece/90/wQ.png");
+ queen_black=load_piece("./piece/90/bQ.png");
+}
+
+SDL_Texture *king_white;
+SDL_Texture *king_black;
+
+void load_kings()
+{
+ king_white=load_piece("./piece/90/wK.png");
+ king_black=load_piece("./piece/90/bK.png");
+}
+
+
+
+
+
+
 
 
 void chess_draw_pieces()
@@ -131,15 +173,19 @@ void chess_draw_pieces()
      }
      if(p.id=='N')
      {
+      texture=knight_black;
      }
      if(p.id=='B')
      {
+      texture=bishop_black;
      }
      if(p.id=='Q')
      {
+      texture=queen_black;
      }
      if(p.id=='K')
      {
+      texture=king_black;
      }
     }
 
@@ -155,15 +201,19 @@ void chess_draw_pieces()
      }
      if(p.id=='N')
      {
+      texture=knight_white;
      }
      if(p.id=='B')
      {
+      texture=bishop_white;
      }
      if(p.id=='Q')
      {
+      texture=queen_white;
      }
      if(p.id=='K')
      {
+      texture=king_white;
      }
     }
     /*end of piece source selection*/
