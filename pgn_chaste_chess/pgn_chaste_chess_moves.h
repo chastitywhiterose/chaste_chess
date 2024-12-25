@@ -87,43 +87,10 @@ void move_xy(int x,int y,int x1,int y1)
   main_piece=main_grid.array[x+y*8];
   main_grid.array[x+y*8].id='0';
 
-
-x_src=check_left+x*main_check.rectsize;
-y_src=y*main_check.rectsize;
-x_dst=check_left+x1*main_check.rectsize;
-y_dst=y1*main_check.rectsize; 
-
-printf("From pixel location %d,%d\n",x_src,y_src);
-printf("To pixel location %d,%d\n",x_dst,y_dst);
-
-x_step=x1-x;
-y_step=y1-y;
-printf("x_step = %d y_step = %d\n",x_step,y_step);
-
- rect_src.x=0;
- rect_src.y=0;
- rect_src.w=t_rect_size;
- rect_src.h=t_rect_size;
-
- rect_dst.x=x_src;
- rect_dst.y=y_src;
- rect_dst.w=t_rect_size;
- rect_dst.h=t_rect_size;
-
- delay=100;
-
- while(rect_dst.x!=x_dst || rect_dst.y!=y_dst)
- {
-  sdl_time = SDL_GetTicks();
-  sdl_time1 = sdl_time+delay;
-
-  rect_dst.x+=x_step;
-  rect_dst.y+=y_step;
-
-  /*printf("rectangle at = %d,%d\n",rect_dst.x,rect_dst.y);*/
-
-
-    /*beginning of piece source selection*/
+    /*
+     beginning of piece source selection
+     select the image drawn based on id of source piece only once
+    */
     if(main_piece.color=='B')
     {
      if(main_piece.id=='P')
@@ -181,7 +148,45 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
     }
     /*end of piece source selection*/
 
-  /*move_render();*/
+
+x_src=check_left+x*main_check.rectsize;
+y_src=y*main_check.rectsize;
+x_dst=check_left+x1*main_check.rectsize;
+y_dst=y1*main_check.rectsize; 
+
+/*printf("From pixel location %d,%d\n",x_src,y_src);
+printf("To pixel location %d,%d\n",x_dst,y_dst);*/
+
+x_step=x1-x;
+y_step=y1-y;
+/*printf("x_step = %d y_step = %d\n",x_step,y_step);*/
+
+ rect_src.x=0;
+ rect_src.y=0;
+ rect_src.w=t_rect_size;
+ rect_src.h=t_rect_size;
+
+ rect_dst.x=x_src;
+ rect_dst.y=y_src;
+ rect_dst.w=t_rect_size;
+ rect_dst.h=t_rect_size;
+
+ delay=1000/fps;
+
+ while(rect_dst.x!=x_dst || rect_dst.y!=y_dst)
+ {
+  sdl_time = SDL_GetTicks();
+  sdl_time1 = sdl_time+delay;
+
+  rect_dst.x+=x_step;
+  rect_dst.y+=y_step;
+
+  /*printf("rectangle at = %d,%d\n",rect_dst.x,rect_dst.y);*/
+
+
+
+
+  move_render();
   SDL_RenderCopy(renderer, texture, &rect_src, &rect_dst);
   SDL_RenderPresent(renderer);
 
@@ -214,7 +219,7 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
 
 
 
- chess_grid_print();
+ /*chess_grid_print();*/
 
 
 

@@ -25,7 +25,7 @@ int mouse_state=0;
 
 /*variables for possible piece slide animation*/
 int x_step,y_step;
-int sdl_time,sdl_time1,delay,fps=60;
+int sdl_time,sdl_time1,delay,fps=30;
 
 /*keyboard variables*/
 int kx=3,ky=3;

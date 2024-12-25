@@ -61,11 +61,23 @@ void pgn_chaste_chess_demo_1()
 /*
 using the easy API that ignores standard notation
 
+This example shows the Queen's Gambit Old Variation Trap where black defends the c4 pawn with b5. This puts black in a position of losing material one way or another. This example is good so I am keeping it.
+
 */
 void pgn_chaste_chess_demo_2()
 {
- move_xy(4,7,6,3);
- move_xy(7,7,0,0);
- move_xy(2,0,5,7);
- move_xy(3,7,3,0);
+move_xy(3,6,3,4);
+move_xy(3,1,3,3);
+move_xy(2,6,2,4);
+move_xy(3,3,2,4);
+move_xy(4,6,4,5);
+move_xy(1,1,1,3);
+move_xy(0,6,0,4);
+move_xy(2,1,2,2);
+move_xy(0,4,1,3);
+move_xy(2,2,1,3);
+move_xy(3,7,5,5);
+move_xy(1,0,2,2);
+move_xy(5,5,2,2);
+
 }
