@@ -37,6 +37,8 @@ void move_piece()
 	  main_grid.array[x+y*8]=ps; /*move piece to new square*/
       main_grid.array[ps.x+ps.y*8].id='0'; /*clear previous square*/
 
+
+
 x1=check_left+ps.x*main_check.rectsize;
 y1=ps.y*main_check.rectsize;
 x2=check_left+x*main_check.rectsize;
@@ -194,6 +196,10 @@ printf("x_step = %d y_step = %d\n",x_step,y_step);
 
 
     /*end of moving piece from one location to another*/
+
+ /*optionally, print to the move log*/
+ /*printf("move_xy(%d,%d,%d,%d);\n",ps.x,ps.y,x,y);*/
+ fprintf(fp,"move_xy(%d,%d,%d,%d);\n",ps.x,ps.y,x,y);
 
 }
 

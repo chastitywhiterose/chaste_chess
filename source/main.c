@@ -67,6 +67,9 @@ However, the code to manage this is far from complete!
 char move_log[0x1000000];
 int move_index=0;
 
+FILE *fp; /*to save a file of moves played*/
+char filename[256]; /*name of move log file*/
+
 #include "sdl_chaste_checkerboard.h"
 #include "sdl_chaste_chess.h"
 #include "sdl_chaste_chess_gamesave.h"
@@ -174,6 +177,10 @@ chaste_font_draw_string_scaled_special(text,x,y,text_scale);
 
  ps.id='0'; /*the id of the selected piece is '0' at the start of the game to signal that no piece is currently selected*/
 
+ /*open a file to output a record of moves in custom notation that only Chastity knows how to use*/
+ sprintf(filename,"ochesslog.txt");
+ fp=fopen(filename,"wb+");
+ if(fp==NULL){printf("Failed to create file \"%s\".\n",filename);}
 
  loop=1;
  while(loop)
@@ -185,6 +192,9 @@ chaste_font_draw_string_scaled_special(text,x,y,text_scale);
 
 
  }
+
+ if(fp!=NULL){fclose(fp);}
+
  SDL_DestroyRenderer(renderer);
  SDL_DestroyWindow(window);
  SDL_Quit();
