@@ -66,7 +66,6 @@ void pgn_chaste_chess_demo_2()
 {
  move_xy(4,7,6,3);
  move_xy(7,7,0,0);
-
  move_xy(2,0,5,7);
-
+ move_xy(3,7,3,0);
 }
