@@ -94,6 +94,7 @@ int move_index=0;
 int main(int argc, char **argv)
 {
  init_main_grid();
+ en_passant.id='0';
 
  /*pgn_chaste_chess_demo_1();*/
 
@@ -180,7 +181,9 @@ int main(int argc, char **argv)
   }
  }
 
- pgn_chaste_chess_demo_2();
+ loop=1;
+
+ pgn_chaste_chess_demo_3();
 
  loop=1;
  while(loop)

@@ -82,7 +82,10 @@ void move(char *move)
 void move_xy(int x,int y,int x1,int y1)
 {
  int x_src,y_src,x_dst,y_dst;
+ int xdiff=0,ydiff=0;
  struct chess_piece main_piece;
+
+
 
   main_piece=main_grid.array[x+y*8];
   main_grid.array[x+y*8].id='0';
@@ -191,19 +194,71 @@ y_step=y1-y;
   SDL_RenderPresent(renderer);
 
   /*time loop used to slow the game down so users can see it*/
-  while(sdl_time<sdl_time1)
+  while(loop==1 && sdl_time<sdl_time1)
   {
    sdl_time=SDL_GetTicks();
+   while(SDL_PollEvent(&e))
+   {
+    if(e.type==SDL_QUIT){loop=0;}
+    if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
+   }
   }
 
  }
 
 
   main_grid.array[x1+y1*8]=main_piece;
+
+
+
+ /*section for en passant correction*/
+
+  /*set direction of pawn based on whose turn it is*/
+  if(turn=='B'){dir=1;} 
+  if(turn=='W'){dir=-1;}
+
+  xdiff=abs(x-x1);
+  ydiff=abs(y-y1);
+
+  printf("xdiff=%d ydiff=%d\n",xdiff,ydiff);
+
+  /*if pawn has moved two spaces, set the en passant value*/
+  if(ydiff==2)
+  {
+   en_passant.id='P';
+   en_passant.color=turn;
+   en_passant.x=x1;
+   en_passant.y=y1-dir;
+   /*printf("en_passant marked at %d,%d\n",en_passant.x,en_passant.y);*/
+  }
+  else
+  {
+
+   if(en_passant.id=='P') /*pawn has captured empty square that is marked for en passant*/
+   {
+
+    if(x1==en_passant.x&&y1==en_passant.y)
+    {
+     main_grid.array[x1+(y1-dir)*8].id='0';
+     /*printf("en_passant captured at %d,%d\n",en_passant.x,en_passant.y);*/
+    }
+   }
+
+   en_passant.id='0';
+  }
+  
+
+  printf("direction==%d\n",dir);
+
+ /*end of en passant correction section*/
+
   move_render();
 
 
  /*move processing end*/
+
+
+
 
  /*swap whose turn it is*/
   if(turn=='W')
@@ -214,6 +269,8 @@ y_step=y1-y;
   {
    turn='W';
   }
+
+
 
 
 

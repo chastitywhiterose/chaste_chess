@@ -81,3 +81,17 @@ move_xy(1,0,2,2);
 move_xy(5,5,2,2);
 
 }
+
+/* this example starts with queen's gambit but includes an en-passant.*/
+void pgn_chaste_chess_demo_3()
+{
+
+move_xy(3,6,3,4);
+move_xy(3,1,3,3);
+move_xy(2,6,2,4);
+move_xy(4,1,4,2);
+move_xy(2,4,2,3);
+move_xy(1,1,1,3);
+move_xy(2,3,1,2);
+
+}
