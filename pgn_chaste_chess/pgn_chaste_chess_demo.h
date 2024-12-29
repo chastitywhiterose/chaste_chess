@@ -95,3 +95,31 @@ move_xy(1,1,1,3);
 move_xy(2,3,1,2);
 
 }
+
+
+/*
+a replay of an actual game that happened
+
+https://lichess.org/I1gkSCRJuPxD
+*/
+
+/* this example starts with queen's gambit but includes an en-passant.*/
+void pgn_chaste_chess_demo_4()
+{
+
+move_xy(3,6,3,4);
+move_xy(6,0,5,2);
+move_xy(2,7,6,3);
+move_xy(7,1,7,2);
+move_xy(6,3,7,4);
+move_xy(6,1,6,3);
+move_xy(7,4,6,5);
+move_xy(5,2,4,4);
+move_xy(6,5,4,3);
+move_xy(5,1,5,2);
+move_xy(4,6,4,5);
+move_xy(5,2,4,3);
+move_xy(3,7,7,3);
+
+
+}

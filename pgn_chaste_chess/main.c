@@ -183,7 +183,7 @@ int main(int argc, char **argv)
 
  loop=1;
 
- pgn_chaste_chess_demo_3();
+ pgn_chaste_chess_demo_4();
 
  loop=1;
  while(loop)
