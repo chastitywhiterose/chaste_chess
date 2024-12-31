@@ -81,6 +81,7 @@ void move(char *move)
 
 void move_xy(int x,int y,int x1,int y1)
 {
+ Uint32 pixel,r,g,b;
  int x_src,y_src,x_dst,y_dst;
  int xdiff=0,ydiff=0;
  struct chess_piece main_piece;
@@ -188,8 +189,25 @@ y_step=y1-y;
 
 
 
+  /*changes whether to redraw the whole scene before each piece. It is slower and not optimized enough yet.*/
+  /*move_render();*/
 
-  move_render();
+
+  /*start of special color section*/
+      pixel=chaste_palette[chaste_palette_index];
+      
+      r=(pixel&0xFF0000)>>16;
+      g=(pixel&0x00FF00)>>8;
+      b=(pixel&0x0000FF);
+      
+      SDL_SetRenderDrawColor(renderer,r,g,b,255);
+      chaste_next_color();
+  /*end of special color section*/
+
+
+  SDL_RenderFillRect(renderer,&rect_dst);
+
+
   SDL_RenderCopy(renderer, texture, &rect_src, &rect_dst);
   SDL_RenderPresent(renderer);
 
@@ -220,7 +238,7 @@ y_step=y1-y;
   xdiff=abs(x-x1);
   ydiff=abs(y-y1);
 
-  printf("xdiff=%d ydiff=%d\n",xdiff,ydiff);
+  /*printf("xdiff=%d ydiff=%d\n",xdiff,ydiff);*/
 
   /*if pawn has moved two spaces, set the en passant value*/
   if(ydiff==2)
@@ -248,7 +266,7 @@ y_step=y1-y;
   }
   
 
-  printf("direction==%d\n",dir);
+  /*printf("direction==%d\n",dir);*/
 
  /*end of en passant correction section*/
 

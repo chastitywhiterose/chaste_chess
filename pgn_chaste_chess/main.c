@@ -77,13 +77,15 @@ int move_index=0;
 #include "pgn_chaste_chess.h"
 #include "pgn_chaste_chess_pieces.h"
 
+#include "chaste_the_rainbow.h"
+
 #include "pgn_chaste_chess_moves.h"
 
 #include "pgn_chaste_chess_demo.h"
 
 /*
 #include "sdl_chaste_chess_gamesave.h"
-#include "chaste_the_rainbow.h"
+
 #include "sdl_chaste_chess_font_texture.h"
 #include "sdl_chaste_chess_font_texture_special.h"
 #include "sdl_chaste_chess_image.h"
@@ -169,7 +171,10 @@ int main(int argc, char **argv)
 
  SDL_RenderPresent(renderer);
 
-
+ /*before beginning the game, load the colors*/
+ chaste_palette_rainbow(40);
+ /*chaste_palette_rainbow_pastel(80);*/
+ /*chaste_palette_view();*/
 
  loop=1;
  while(loop)
