@@ -48,13 +48,15 @@ void chaste_checker()
    rect.y=y;
    if(index==1)
    {
-    SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
-    SDL_RenderFillRect(renderer,&rect);
+    /*SDL_SetRenderDrawColor(renderer,g0,g0,g0,255);
+    SDL_RenderFillRect(renderer,&rect);*/
+    SDL_FillRect(surface,&rect,SDL_MapRGB(surface->format,g0,g0,g0));
    }
    if(index==0)
    {
-    SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
-    SDL_RenderFillRect(renderer,&rect);
+    /*SDL_SetRenderDrawColor(renderer,g1,g1,g1,255);
+    SDL_RenderFillRect(renderer,&rect);*/
+    SDL_FillRect(surface,&rect,SDL_MapRGB(surface->format,g1,g1,g1));
    }
    index^=1;
    x+=main_check.rectsize;

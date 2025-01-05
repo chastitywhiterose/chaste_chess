@@ -1,3 +1,9 @@
+/*
+ This is a special version of PGN Chaste Chess except without GPU rendering. Everything is rendered CPU side with SDL surfaces!
+ Source file names beginning with CPU have been modified from the original. The other parts of the program used to manage the chessboard data itself have not changed.
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,6 +46,7 @@ int g0=0x55,g1=0xAA;
 char text[0x200],text_scale=1;
 int text_color=0xFF00FF;
 
+SDL_Surface *surface;
 SDL_Texture *texture;
 
 /*chess notation variables*/
@@ -73,13 +80,13 @@ However, the code to manage this is far from complete!
 char move_log[0x1000000];
 int move_index=0;
 
-#include "pgn_chaste_checkerboard.h"
+#include "cpu_chaste_checkerboard.h"
 #include "pgn_chaste_chess.h"
-#include "pgn_chaste_chess_pieces.h"
+#include "cpu_chaste_chess_pieces.h"
 
 #include "chaste_the_rainbow.h"
 
-#include "pgn_chaste_chess_moves.h"
+#include "cpu_chaste_chess_moves.h"
 
 #include "pgn_chaste_chess_demo.h"
 
@@ -114,8 +121,21 @@ int main(int argc, char **argv)
  }
  window=SDL_CreateWindow("SDL Chaste Chess",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,width,height,SDL_WINDOW_SHOWN );
  if(window==NULL){printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
- renderer = SDL_CreateRenderer(window,-1,0);
+
+ /*
+  set up the main surface for the screen
+  This is the old way of doing things CPU side.
+ */
+ surface = SDL_GetWindowSurface( window );
+
+ /*
+  create a software renderer for the window surface
+  this is done because if we don't have a renderer, all of the code that used it in the original version of PGN Chaste Chess will fail to compile.
+ */
+ renderer = SDL_CreateSoftwareRenderer(surface);
  if(renderer==NULL){printf( "Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
+
+
 
  printf("SDL Program Compiled Correctly\n");
 
@@ -152,12 +172,17 @@ int main(int argc, char **argv)
  /*SDL_SetRenderDrawColor(renderer,0x80,0x80,0x80,255);*/
  /*SDL_SetRenderDrawColor(renderer,0xC0,0xC0,0xC0,255);*/
 
- SDL_SetRenderDrawColor(renderer,0,0,0,255);
- SDL_RenderFillRect(renderer,NULL);
+ /*SDL_SetRenderDrawColor(renderer,0,128,0,255);
+ SDL_RenderFillRect(renderer,NULL);*/
+
+ SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,255,0,255));
 
  chaste_checker();
 
+ SDL_UpdateWindowSurface(window); /*make the updated window display on screen*/
+
  /*printf("First, we load the pawns. Arguably the most important Chess pieces.\n");*/
+
 
  load_pawns();
  load_rooks();
@@ -169,7 +194,8 @@ int main(int argc, char **argv)
  chess_draw_pieces();
 
 
- SDL_RenderPresent(renderer);
+ /*SDL_RenderPresent(renderer);*/ /*render everything to the surface window*/
+ SDL_UpdateWindowSurface(window); /*make the updated window display on screen*/
 
  /*before beginning the game, load the colors*/
  chaste_palette_rainbow(40);

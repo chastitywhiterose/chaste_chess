@@ -4,11 +4,12 @@ redraw the screen after the move
 
 void move_render()
 {
- SDL_SetRenderDrawColor(renderer,0,0,0,255);
- SDL_RenderFillRect(renderer,NULL);
+ /*SDL_SetRenderDrawColor(renderer,0,0,0,255);
+ SDL_RenderFillRect(renderer,NULL);*/
+ SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,255,0,255));
  chaste_checker();
  chess_draw_pieces();
- SDL_RenderPresent(renderer);
+ /*SDL_RenderPresent(renderer);*/
  SDL_UpdateWindowSurface(window);
 }
 
@@ -86,6 +87,8 @@ void move_xy(int x,int y,int x1,int y1)
  int x_src,y_src,x_dst,y_dst;
  int xdiff=0,ydiff=0;
  struct chess_piece main_piece;
+
+ SDL_Surface *texture;
 
 
 
@@ -212,8 +215,10 @@ y_step=y1-y;
   SDL_FillRect(surface,&rect_dst,SDL_MapRGB(surface->format,r,g,b));
 
 
-  SDL_RenderCopy(renderer, texture, &rect_src, &rect_dst);
-  SDL_RenderPresent(renderer);
+  /*SDL_RenderCopy(renderer, texture, &rect_src, &rect_dst);*/
+  /*SDL_RenderPresent(renderer);*/
+
+  SDL_BlitSurface(texture,&rect_src,surface,&rect_dst);
   SDL_UpdateWindowSurface(window);
 
   /*time loop used to slow the game down so users can see it*/
