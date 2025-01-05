@@ -204,7 +204,7 @@ y_step=y1-y;
       g=(pixel&0x00FF00)>>8;
       b=(pixel&0x0000FF);
       
-      SDL_SetRenderDrawColor(renderer,r,g,b,255);
+      /*SDL_SetRenderDrawColor(renderer,r,g,b,255);*/
       chaste_next_color();
   /*end of special color section*/
 

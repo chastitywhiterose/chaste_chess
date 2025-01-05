@@ -17,7 +17,7 @@
 int width=1280,height=720;
 int loop=1;
 SDL_Window *window;
-SDL_Renderer *renderer;
+/*SDL_Renderer *renderer;*/
 SDL_Event e;
 SDL_Rect rect,rect_dst,rect_src;
 
@@ -81,7 +81,7 @@ char move_log[0x1000000];
 int move_index=0;
 
 #include "cpu_chaste_checkerboard.h"
-#include "pgn_chaste_chess.h"
+#include "cpu_chaste_chess.h"
 #include "cpu_chaste_chess_pieces.h"
 
 #include "chaste_the_rainbow.h"
@@ -132,8 +132,9 @@ int main(int argc, char **argv)
   create a software renderer for the window surface
   this is done because if we don't have a renderer, all of the code that used it in the original version of PGN Chaste Chess will fail to compile.
  */
- renderer = SDL_CreateSoftwareRenderer(surface);
- if(renderer==NULL){printf( "Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}
+
+ /*renderer = SDL_CreateSoftwareRenderer(surface);
+ if(renderer==NULL){printf( "Renderer could not be created! SDL_Error: %s\n", SDL_GetError() );return -1;}*/
 
 
 
@@ -226,7 +227,7 @@ int main(int argc, char **argv)
   }
  }
 
- SDL_DestroyRenderer(renderer);
+ /*SDL_DestroyRenderer(renderer);*/
  SDL_DestroyWindow(window);
  SDL_Quit();
  return 0;
