@@ -251,7 +251,7 @@ y_step=y1-y;
   /*printf("xdiff=%d ydiff=%d\n",xdiff,ydiff);*/
 
   /*if pawn has moved two spaces, set the en passant value*/
-  if(xdiff==1&&ydiff==2)
+  if(xdiff==0&&ydiff==2)
   {
    en_passant.id='P';
    en_passant.color=turn;
