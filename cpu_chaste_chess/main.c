@@ -90,15 +90,9 @@ int move_index=0;
 
 #include "pgn_chaste_chess_demo.h"
 
-/*
-#include "sdl_chaste_chess_gamesave.h"
+#include "cpu_chaste_chess_graphics.h"
+#include "cpu_chaste_chess_input.h"
 
-#include "sdl_chaste_chess_font_texture.h"
-#include "sdl_chaste_chess_font_texture_special.h"
-#include "sdl_chaste_chess_image.h"
-#include "sdl_chaste_chess_graphics.h"
-#include "sdl_chaste_chess_input.h"
-*/
 
 int main(int argc, char **argv)
 {
@@ -203,6 +197,27 @@ int main(int argc, char **argv)
  /*chaste_palette_rainbow_pastel(80);*/
  /*chaste_palette_view();*/
 
+/* loop=1;
+ while(loop)
+ {
+  while(SDL_PollEvent(&e))
+  {
+   if(e.type==SDL_QUIT){loop=0;}
+   if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
+  }
+ }
+*/
+
+ /*main gameloop*/
+ loop=1;
+ while(loop)
+ {
+  chaste_chess_check_input();
+ }
+
+ /*pgn_chaste_chess_demo_4();*/
+
+/*
  loop=1;
  while(loop)
  {
@@ -212,20 +227,7 @@ int main(int argc, char **argv)
    if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
   }
  }
-
- loop=1;
-
- pgn_chaste_chess_demo_4();
-
- loop=1;
- while(loop)
- {
-  while(SDL_PollEvent(&e))
-  {
-   if(e.type==SDL_QUIT){loop=0;}
-   if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
-  }
- }
+*/
 
  /*SDL_DestroyRenderer(renderer);*/
  SDL_DestroyWindow(window);
