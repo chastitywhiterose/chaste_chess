@@ -238,10 +238,8 @@ y_step=y1-y;
 
  }
 
-
+  main_piece.moves++; /*must add to move counter for piece or pawns will not be correct*/
   main_grid.array[x1+y1*8]=main_piece;
-
-
 
  /*section for en passant correction*/
 

@@ -217,14 +217,14 @@ int main(int argc, char **argv)
  if(fp==NULL){printf("Failed to create file \"%s\".\n",filename);}
 
  /*main gameloop*/
- loop=0;
+ loop=1;
  while(loop)
  {
   chaste_chess_check_input();
  }
 
- loop=1;
- pgn_chaste_chess_demo_5();
+ /*loop=1;
+ pgn_chaste_chess_demo_5();*/
 
  if(fp!=NULL){fclose(fp);}
  
