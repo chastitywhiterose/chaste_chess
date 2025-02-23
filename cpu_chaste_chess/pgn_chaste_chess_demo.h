@@ -1,5 +1,25 @@
 /*pgn_chaste_chess_demo.h*/
 
+/*
+ a simple but useful function to pause until the user presses escape or clicks the x in the window.
+ I use this so that I can wait until OBS studio is recording my game before a demo starts playing.
+ the global loop variable is used to control the loop and break out of it. It must be set back to 1 after the loop exits to be
+ correct for the timing code later.
+*/
+void wait_for_input()
+{
+ loop=1;
+ while(loop)
+ {
+  while(SDL_PollEvent(&e))
+  {
+   if(e.type==SDL_QUIT){loop=0;}
+   if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
+  }
+ }
+ loop=1;
+}
+
 void pgn_chaste_chess_demo()
 {
  int x=0;
@@ -153,3 +173,67 @@ Qd3+ 26. Ke1 Qe2# 0-1
 
 */
 
+
+/* this example is an actual game I played with my mom on February 20 of 2025.*/
+void pgn_chaste_chess_demo_5()
+{
+
+flip_main_grid();
+move_render();
+wait_for_input();
+
+move_xy(4,1,4,3);
+move_xy(4,6,4,4);
+move_xy(3,1,3,3);
+move_xy(4,4,3,3);
+move_xy(5,1,5,3);
+move_xy(0,6,0,4);
+move_xy(2,0,3,1);
+move_xy(5,7,1,3);
+move_xy(4,0,7,3);
+move_xy(5,6,5,5);
+move_xy(5,0,1,4);
+move_xy(2,6,2,5);
+move_xy(1,4,2,3);
+move_xy(4,7,4,3);
+move_xy(2,3,3,2);
+move_xy(4,3,6,1);
+move_xy(2,1,2,2);
+move_xy(3,3,2,2);
+move_xy(1,1,2,2);
+move_xy(1,3,4,6);
+move_xy(2,2,2,3);
+move_xy(6,1,7,0);
+move_xy(3,1,0,4);
+move_xy(0,7,0,4);
+move_xy(0,1,0,3);
+move_xy(7,0,6,0);
+move_xy(3,2,5,0);
+move_xy(6,0,5,0);
+move_xy(3,0,2,1);
+move_xy(5,0,2,3);
+move_xy(1,0,2,2);
+move_xy(5,5,5,4);
+move_xy(7,3,4,0);
+move_xy(3,6,3,4);
+move_xy(4,0,4,4);
+move_xy(4,6,5,5);
+move_xy(4,4,1,7);
+move_xy(5,5,2,2);
+move_xy(1,7,3,5);
+move_xy(3,7,4,7);
+move_xy(3,5,2,6);
+move_xy(2,2,4,4);
+move_xy(2,1,3,1);
+move_xy(4,4,2,6);
+move_xy(0,0,2,0);
+move_xy(2,6,5,3);
+move_xy(3,1,4,0);
+move_xy(2,3,2,0);
+move_xy(4,0,4,1);
+move_xy(2,0,4,2);
+move_xy(4,1,3,0);
+move_xy(4,2,3,1);
+
+wait_for_input();
+}
