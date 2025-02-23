@@ -31,7 +31,7 @@ int mouse_state=0;
 
 /*variables for possible piece slide animation*/
 int x_step,y_step;
-int sdl_time,sdl_time1,delay,fps=30;
+int sdl_time,sdl_time1,delay,fps=60;
 
 /*keyboard variables*/
 int kx=3,ky=3;
@@ -77,8 +77,11 @@ However, the code to manage this is far from complete!
 
 
 
-char move_log[0x1000000];
+char move_log[0x1000];
 int move_index=0;
+
+FILE *fp; /*to save a file of moves played*/
+char filename[256]; /*name of move log file*/
 
 #include "cpu_chaste_checkerboard.h"
 #include "cpu_chaste_chess.h"
@@ -208,12 +211,19 @@ int main(int argc, char **argv)
  }
 */
 
+ /*open a file to output a record of moves in custom notation that only Chastity knows how to use*/
+ sprintf(filename,"ochesslog.txt");
+ fp=fopen(filename,"wb+");
+ if(fp==NULL){printf("Failed to create file \"%s\".\n",filename);}
+
  /*main gameloop*/
  loop=1;
  while(loop)
  {
   chaste_chess_check_input();
  }
+
+ if(fp!=NULL){fclose(fp);}
 
  /*pgn_chaste_chess_demo_4();*/
 

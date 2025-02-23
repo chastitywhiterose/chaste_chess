@@ -300,6 +300,24 @@ while(SDL_PollEvent(&e))
    if(e.type == SDL_KEYUP)
    {
     if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+
+    if(e.key.keysym.sym==SDLK_r)
+    {
+     init_main_grid();
+     turn='W';
+     view_flipped=0;
+     move_render();
+    }
+
+    if(e.key.keysym.sym==SDLK_v)
+    {
+     flip_main_grid();
+     move_render();
+
+     /*optionally, print to the move log*/
+     fprintf(fp,"flip_main_grid();\nmove_render();\n");
+    }
+
    }
 
    mouse_state=0;

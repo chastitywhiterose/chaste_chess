@@ -302,14 +302,10 @@ y_step=y1-y;
    turn='W';
   }
 
+ /*optionally, print to the move log*/
+ fprintf(fp,"move_xy(%d,%d,%d,%d);\n",x,y,x1,y1);
 
-
-
-
-
-
+ /*optionally, print a text form of the board to the terminal*/
  /*chess_grid_print();*/
-
-
 
 }

@@ -123,3 +123,33 @@ move_xy(3,7,7,3);
 
 
 }
+
+/*
+
+
+[Event "Casual correspondence game"]
+[Site "https://lichess.org/UoFLugyE"]
+[Date "2025.02.20"]
+[Round "?"]
+[White "Judena"]
+[Black "chastitywhiterose"]
+[Result "0-1"]
+[WhiteElo "1500"]
+[BlackElo "1789"]
+[ECO "D00"]
+[TimeControl "-"]
+[UTCDate "2025.02.20"]
+[UTCTime "01:09:11"]
+[Variant "Standard"]
+[Termination "Normal"]
+[GameId "UoFLugyE"]
+
+1. d4 d5 2. e4 dxe4 3. c4 h5 4. Be2 Bg4 5. Qa4+ c6 6. Bg5 f6 7. Bf4 Qxd4 8.
+Be3 Qxb2 9. f3 exf3 10. gxf3 Bd7 11. f4 Qxa1 12. Bxh5+ Rxh5 13. h4 Qxb1+
+14. Bc1 Qxc1+ 15. Kf2 Qxf4+ 16. Nf3 c5 17. Qd1 e5 18. Qd5 Bc6 19. Qxg8 Bxf3
+20. Qe6+ Kd8 21. Qf7 Bd5+ 22. Ke2 Bxf7 23. Rf1 Bxc4+ 24. Kd1 Qxf1+ 25. Kd2
+Qd3+ 26. Ke1 Qe2# 0-1
+
+
+*/
+
