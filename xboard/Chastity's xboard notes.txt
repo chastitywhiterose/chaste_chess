@@ -19,10 +19,9 @@ xboard -fcp "/usr/games/gnuchess"
 Commands proven to work on my Linux system to play the games I want.
 
 
-xboard -fcp "/usr/games/fairy-stockfish" -variant chess
-xboard -fcp "/usr/games/fairy-stockfish" -variant shogi
-xboard -fcp "/usr/games/fairy-stockfish" -variant xiangqi
-
+xboard -fcp "/usr/games/fairy-stockfish" -variant normal -xclock -depth 1
+xboard -fcp "/usr/games/fairy-stockfish" -variant shogi -xclock -depth 1
+xboard -fcp "/usr/games/fairy-stockfish" -variant xiangqi -xclock -depth 1
 
 ---
 
