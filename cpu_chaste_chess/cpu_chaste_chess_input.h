@@ -70,6 +70,19 @@ while(SDL_PollEvent(&e))
 void move_piece()
 {
  move_xy(ps.x,ps.y,x,y);
+
+ /*save to the memory move log*/
+
+ xy_move_log[xy_move_index]=ps.x;
+ xy_move_log[xy_move_index+1]=ps.y;
+ xy_move_log[xy_move_index+2]=x;
+ xy_move_log[xy_move_index+3]=y;
+
+ xy_move_index+=4;
+
+ /*move saved to memory*/
+
+
  init_highlight();
 }
 
@@ -258,7 +271,7 @@ if(p.id=='0'&&ps.id=='K')
 
       
 	
- SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,255,0,255));
+ SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,0,0,0));
  chaste_checker();
  chess_grid_draw_highlight();
  chess_draw_pieces();
@@ -307,6 +320,7 @@ while(SDL_PollEvent(&e))
      turn='W';
      view_flipped=0;
      move_render();
+     xy_move_index=0;
     }
 
     if(e.key.keysym.sym==SDLK_v)

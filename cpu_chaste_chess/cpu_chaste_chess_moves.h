@@ -10,7 +10,7 @@ void move_render()
 {
  /*SDL_SetRenderDrawColor(renderer,0,0,0,255);
  SDL_RenderFillRect(renderer,NULL);*/
- SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,255,0,255));
+ SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,0,0,0));
  chaste_checker();
  chess_draw_pieces();
  /*SDL_RenderPresent(renderer);*/
@@ -300,7 +300,7 @@ y_step=y1-y;
    turn='W';
   }
 
- /*optionally, print to the move log*/
+ /*optionally, print to the file move log*/
  fprintf(fp,"move_xy(%d,%d,%d,%d);\n",x,y,x1,y1);
 
  /*optionally, print a text form of the board to the terminal*/

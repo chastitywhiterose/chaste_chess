@@ -72,13 +72,15 @@ int square_rank_dest; /*1 to 8*/
  [5] Rank of the Destination Square
 
 However, the code to manage this is far from complete!
+This system may change.
 
 */
 
 
 
-char move_log[0x1000];
-int move_index=0;
+char xy_move_log[0x1000];
+int xy_move_index=0;
+int xy_move_length=0;
 
 FILE *fp; /*to save a file of moves played*/
 char filename[256]; /*name of move log file*/
@@ -173,7 +175,7 @@ int main(int argc, char **argv)
  /*SDL_SetRenderDrawColor(renderer,0,128,0,255);
  SDL_RenderFillRect(renderer,NULL);*/
 
- SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,255,0,255));
+ SDL_FillRect(surface,NULL,SDL_MapRGB(surface->format,0,0,0));
 
  chaste_checker();
 
@@ -227,19 +229,92 @@ int main(int argc, char **argv)
  pgn_chaste_chess_demo_5();*/
 
  if(fp!=NULL){fclose(fp);}
- 
 
-/*
- loop=1;
- while(loop)
+
+/*after game ends, start the replay*/
+
+
+xy_move_length=xy_move_index;
+xy_move_index=0;
+
+/*reset move index to zero after getting the length it was at when the game ended.*/
+
+/*reset board position but keep the perspective of white or black depending on what it was set to when flipped with the v key*/
+
+     init_main_grid();
+     turn='W';
+     /*view_flipped=0;*/
+     move_render();
+
+/*finally begin the loop*/
+
+loop=1;
+while(loop!=0)
+{
+
+ /*make a small delay before playing back the moves.*/
+
+ delay=1000/*/fps*/;
+ sdl_time = SDL_GetTicks();
+ sdl_time1 = sdl_time+delay;
+
+  /*time loop used to slow the game down so users can see it*/
+  while(sdl_time<sdl_time1)
+  {
+   sdl_time=SDL_GetTicks();
+  }
+
+while(xy_move_index<xy_move_length)
+{
+
+ x=xy_move_log[xy_move_index];
+ y=xy_move_log[xy_move_index+1];
+ x1=xy_move_log[xy_move_index+2];
+ y1=xy_move_log[xy_move_index+3];
+
+ printf("move_xy(%d,%d,%d,%d);\n",x,y,x1,y1);
+
+ move_xy(x,y,x1,y1);
+
+ /*wait_for_input();*/
+
+ xy_move_index+=4;
+
+
+}
+
+loop=2;
+
+ while(loop==2)
  {
   while(SDL_PollEvent(&e))
   {
    if(e.type==SDL_QUIT){loop=0;}
-   if(e.type==SDL_KEYDOWN){if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}}
+
+   if(e.type == SDL_KEYUP)
+   {
+    if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+
+    if(e.key.keysym.sym==SDLK_r)
+    {
+     init_main_grid();
+     turn='W';
+     view_flipped=0;
+     move_render();
+     xy_move_index=0;
+     loop=1;
+    }
+
+   }
+
   }
  }
-*/
+
+}
+
+
+
+
 
  /*SDL_DestroyRenderer(renderer);*/
  SDL_DestroyWindow(window);
