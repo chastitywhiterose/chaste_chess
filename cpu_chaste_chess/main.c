@@ -88,13 +88,10 @@ char filename[256]; /*name of move log file*/
 #include "cpu_chaste_checkerboard.h"
 #include "cpu_chaste_chess.h"
 #include "cpu_chaste_chess_pieces.h"
-
 #include "chaste_the_rainbow.h"
-
+#include "sdl_chastefont_surface.h"
 #include "cpu_chaste_chess_moves.h"
-
-#include "pgn_chaste_chess_demo.h"
-
+#include "cpu_chaste_chess_demo.h"
 #include "cpu_chaste_chess_graphics.h"
 #include "cpu_chaste_chess_input.h"
 
@@ -201,6 +198,9 @@ int main(int argc, char **argv)
  chaste_palette_rainbow(40);
  /*chaste_palette_rainbow_pastel(80);*/
  /*chaste_palette_view();*/
+
+ /*then we must load the font*/
+ main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");
 
 /* loop=1;
  while(loop)

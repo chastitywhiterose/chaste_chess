@@ -1,7 +1,7 @@
 /* cpu_chaste_chess_input.h */
 
 
-void get_rank_and_file()
+void input_get_rank_and_file(int x,int y)
 {
  if(view_flipped!=0)
  {
@@ -54,7 +54,7 @@ while(SDL_PollEvent(&e))
     x=(x-check_left)/main_check.rectsize;
     y=y/main_check.rectsize;
 
-    get_rank_and_file();
+    input_get_rank_and_file(x,y);
 
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);
@@ -278,6 +278,8 @@ if(p.id=='0'&&ps.id=='K')
 
   /*draw_en_passant();*/
 
+ write_move_rank_file();
+
  SDL_UpdateWindowSurface(window);
 
 }
@@ -357,7 +359,7 @@ while(SDL_PollEvent(&e))
     x=(x-check_left)/main_check.rectsize;
     y=y/main_check.rectsize;
 
-    get_rank_and_file();
+    input_get_rank_and_file(x,y);
 
 
     printf("Cartesian Square clicked: X=%d Y=%d\n",x,y);

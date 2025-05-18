@@ -6,6 +6,32 @@
 redraw the screen after the move
 */
 
+
+void get_rank_and_file(int x,int y)
+{
+ if(view_flipped!=0)
+ {
+  square_rank=y+'1';
+  square_file='H'-x;
+ }
+ else
+ {
+  square_rank='8'-y;
+  square_file='A'+x;
+ }
+}
+
+
+void write_move_rank_file()
+{
+
+ text_color=0xFFFFFF;
+ text_scale=4;
+ sprintf(text,"%c%c->%c%c\n",square_file_source,square_rank_source,square_file_dest,square_rank_dest);
+ chaste_font_draw_string_scaled_alpha(text,main_font.char_width*text_scale*1,main_check.rectsize,text_scale);
+
+}
+
 void move_render()
 {
  /*SDL_SetRenderDrawColor(renderer,0,0,0,255);
@@ -14,6 +40,9 @@ void move_render()
  chaste_checker();
  chess_draw_pieces();
  /*SDL_RenderPresent(renderer);*/
+
+ write_move_rank_file();
+
  SDL_UpdateWindowSurface(window);
 }
 
@@ -94,7 +123,13 @@ void move_xy(int x,int y,int x1,int y1)
 
  SDL_Surface *texture;
 
+ get_rank_and_file(x,y);
+ square_file_source=square_file;
+ square_rank_source=square_rank;
 
+ get_rank_and_file(x1,y1);
+ square_file_dest=square_file;
+ square_rank_dest=square_rank;
 
   main_piece=main_grid.array[x+y*8];
   main_grid.array[x+y*8].id='0';
@@ -185,6 +220,9 @@ y_step=y1-y;
 
  delay=1000/fps;
 
+  /*redraw the whole scene before each piece animation.*/
+  move_render();
+
  while(rect_dst.x!=x_dst || rect_dst.y!=y_dst)
  {
   sdl_time = SDL_GetTicks();
@@ -197,8 +235,7 @@ y_step=y1-y;
 
 
 
-  /*changes whether to redraw the whole scene before each piece. It is slower and not optimized enough yet.*/
-  /*move_render();*/
+
 
 
   /*start of special color section*/
