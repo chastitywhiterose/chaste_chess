@@ -406,7 +406,9 @@ void chaste_font_draw_string_scaled_special(const char *s,int cx,int cy,int scal
       rect_dest.w=scale;
       rect_dest.h=scale;
       
-      pixel=text_color;
+      /*pixel=text_color;*/
+
+      pixel=chaste_palette[chaste_palette_index];
       
       r=(pixel&0xFF0000)>>16;
       g=(pixel&0x00FF00)>>8;
@@ -416,6 +418,9 @@ void chaste_font_draw_string_scaled_special(const char *s,int cx,int cy,int scal
       SDL_RenderFillRect(renderer,&rect_dest);*/
 
       SDL_FillRect(surface,&rect_dest,SDL_MapRGB(surface->format,r,g,b));
+
+      chaste_next_color();
+
      }
      
      sx++;
