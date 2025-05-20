@@ -28,7 +28,11 @@ void write_move_rank_file()
  text_color=0xFFFFFF;
  text_scale=4;
  sprintf(text,"%c%c->%c%c\n",square_file_source,square_rank_source,square_file_dest,square_rank_dest);
- chaste_font_draw_string_scaled_alpha(text,main_font.char_width*text_scale*1,main_check.rectsize,text_scale);
+ chaste_font_draw_string_scaled_alpha(text,main_font.char_width*text_scale*1,main_check.rectsize*4,text_scale);
+
+ text_scale=5;
+ chaste_palette_index=chaste_palette_index1;
+ chaste_font_draw_string_scaled_special("Chaste\n Tris",16,32,text_scale);
 
 }
 

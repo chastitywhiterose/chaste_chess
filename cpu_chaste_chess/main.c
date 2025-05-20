@@ -44,7 +44,7 @@ int g0=0x55,g1=0xAA;
 
 
 char text[0x200],text_scale=1;
-int text_color=0xFF00FF;
+int text_color=0xFFFFFF;
 
 SDL_Surface *surface;
 SDL_Texture *texture;
@@ -191,8 +191,7 @@ int main(int argc, char **argv)
  chess_draw_pieces();
 
 
- /*SDL_RenderPresent(renderer);*/ /*render everything to the surface window*/
- SDL_UpdateWindowSurface(window); /*make the updated window display on screen*/
+
 
  /*before beginning the game, load the colors*/
  chaste_palette_rainbow(40);
@@ -201,6 +200,13 @@ int main(int argc, char **argv)
 
  /*then we must load the font*/
  main_font=chaste_font_load("./font/FreeBASIC Font 8.bmp");
+
+ text_scale=5;
+ chaste_palette_index=chaste_palette_index1;
+ chaste_font_draw_string_scaled_special("Chaste\n Tris",16,32,text_scale);
+
+ /*SDL_RenderPresent(renderer);*/ /*render everything to the surface window*/
+ SDL_UpdateWindowSurface(window); /*make the updated window display on screen*/
 
 /* loop=1;
  while(loop)
