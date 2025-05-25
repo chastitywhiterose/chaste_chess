@@ -288,6 +288,14 @@ y_step=y1-y;
  }
 
   main_piece.moves++; /*must add to move counter for piece or pawns will not be correct*/
+
+  /*handle promotion of a pawn*/
+  if(main_piece.id=='P')
+  {
+   /*chess_grid_promo_screen();*/
+   if(y1==0||y1==7){main_piece.id=promo_id;}
+  }
+
   main_grid.array[x1+y1*8]=main_piece;
 
  /*section for en passant correction*/

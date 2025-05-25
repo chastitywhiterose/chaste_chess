@@ -59,6 +59,7 @@ int square_rank_source; /*1 to 8*/
 int square_file_dest; /*A to H*/
 int square_rank_dest; /*1 to 8*/
 
+int promo_id='Q'; /*decides what a pawn promotes to if it reaches the other side!*/
 
 /*
  large array to store moves
@@ -73,7 +74,6 @@ int square_rank_dest; /*1 to 8*/
 
 However, the code to manage this is far from complete!
 This system may change.
-
 */
 
 
@@ -90,9 +90,9 @@ char filename[256]; /*name of move log file*/
 #include "cpu_chaste_chess_pieces.h"
 #include "chaste_the_rainbow.h"
 #include "sdl_chastefont_surface.h"
+#include "cpu_chaste_chess_graphics.h"
 #include "cpu_chaste_chess_moves.h"
 #include "cpu_chaste_chess_demo.h"
-#include "cpu_chaste_chess_graphics.h"
 #include "cpu_chaste_chess_input.h"
 
 
