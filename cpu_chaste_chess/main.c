@@ -203,7 +203,7 @@ int main(int argc, char **argv)
 
  text_scale=5;
  chaste_palette_index=chaste_palette_index1;
- chaste_font_draw_string_scaled_special("Chaste\n Tris",16,32,text_scale);
+ chaste_font_draw_string_scaled_special("Chaste\nChess",16,32,text_scale);
 
  /*SDL_RenderPresent(renderer);*/ /*render everything to the surface window*/
  SDL_UpdateWindowSurface(window); /*make the updated window display on screen*/

@@ -34,7 +34,7 @@ void write_move_rank_file()
 
  chaste_palette_index=chaste_palette_index1;
 
- chaste_font_draw_string_scaled_special("Chaste\n Tris",16,32,text_scale);
+ chaste_font_draw_string_scaled_special("Chaste\nChess",16,32,text_scale);
 
  chaste_palette_index1++;
  if(chaste_palette_index1>=chaste_palette_length)
