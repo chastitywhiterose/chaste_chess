@@ -231,6 +231,8 @@ int main(int argc, char **argv)
   chaste_chess_check_input();
  }
 
+ starting_view_flip=view_flipped; /*was view flipped in the last game? Will need info for animation.*/
+
  /*loop=1;
  pgn_chaste_chess_demo_5();*/
 
@@ -248,8 +250,9 @@ xy_move_index=0;
 /*reset board position but keep the perspective of white or black depending on what it was set to when flipped with the v key*/
 
      init_main_grid();
+     if(starting_view_flip){flip_main_grid();}
+     view_flipped=starting_view_flip;
      turn='W';
-     /*view_flipped=0;*/
      move_render();
 
 /*finally begin the loop*/
@@ -304,8 +307,9 @@ loop=2;
     if(e.key.keysym.sym==SDLK_r)
     {
      init_main_grid();
+     if(starting_view_flip){flip_main_grid();}
+     view_flipped=starting_view_flip;
      turn='W';
-     view_flipped=0;
      move_render();
      xy_move_index=0;
      loop=1;

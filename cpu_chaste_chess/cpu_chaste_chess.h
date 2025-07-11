@@ -104,6 +104,7 @@ void init_main_grid()
 }
 
 int view_flipped=0;
+int starting_view_flip=0;
 
 void flip_main_grid()
 {
