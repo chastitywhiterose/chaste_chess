@@ -144,6 +144,7 @@ void move_xy(int x,int y,int x1,int y1)
  square_rank_dest=square_rank;
 
   main_piece=main_grid.array[x+y*8];
+
   main_grid.array[x+y*8].id='0';
 
     /*
@@ -296,6 +297,7 @@ y_step=y1-y;
    if(y1==0||y1==7){main_piece.id=promo_id;}
   }
 
+  pieces_captured[xy_move_index]=main_grid.array[x1+y1*8]; /*whatever was here will be saved as a captured piece*/
   main_grid.array[x1+y1*8]=main_piece;
 
  /*section for en passant correction*/

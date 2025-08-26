@@ -82,11 +82,15 @@ char xy_move_log[0x1000];
 int xy_move_index=0;
 int xy_move_length=0;
 
+#include "cpu_chaste_chess.h"
+
+struct chess_piece pieces_captured[0x1000];
+
 FILE *fp; /*to save a file of moves played*/
 char filename[256]; /*name of move log file*/
 
 #include "cpu_chaste_checkerboard.h"
-#include "cpu_chaste_chess.h"
+
 #include "cpu_chaste_chess_pieces.h"
 #include "chaste_the_rainbow.h"
 #include "sdl_chastefont_surface.h"
@@ -273,6 +277,7 @@ while(loop!=0)
    sdl_time=SDL_GetTicks();
   }
 
+/*replay moves from the movelog*/
 while(xy_move_index<xy_move_length)
 {
 
